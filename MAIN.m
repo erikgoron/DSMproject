@@ -1,6 +1,10 @@
 clear all
 global q  Jac tstart tstep tend time qd qdd q0  
 
+%comment to suppress warning about "variable is changing size every
+%iteration
+%#ok<*SAGROW>
+
 Readinputdata1()
 
 k = 0;
@@ -22,7 +26,7 @@ k = k + 1;
 % %... Store variables for reporting
  t(k)= time;
 
-Positions(:,k) = q;
+Positions(:,k) = q; 
 Velocities(:,k) = qd;
 Accelerations(:,k) = qdd;
 

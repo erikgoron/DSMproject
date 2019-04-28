@@ -17,18 +17,14 @@ k = k+1;
 
 %... Evaluate the Position Constraint Equations
 Flag.Position = 1;
-Flag.Jacobian = 0;
+Flag.Jacobian = 1;
 Flag.Niu=0;
 Flag.Gamma=0;
 
 Preprocessdata(q); 
 
-[Phi,~,~,~] = KinematicConstraints(body,time);
+[Phi,Jac,~,~] = KinematicConstraints(body,time);
 
-%... Evaluate the Jacobian matrix
-    Flag.Position = 0;
-    Flag.Jacobian = 1;
-    [~,Jac,~,~]    = KinematicConstraints(body,time);
 
 %... Calculate the iteration step
     deltaq         = Jac\Phi;
