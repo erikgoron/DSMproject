@@ -1,4 +1,4 @@
-function    [q     ] = Positionanalysis(q,time)
+function    [q     ] = PositionAnalysis(q,time)
 %POSITION ANALYSIS Function to control the position analysis of
 %                  the mechanical system using the Newton-Raphson
 % method to solve the position constraint equations %%
