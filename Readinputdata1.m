@@ -1,7 +1,7 @@
 function Readinputdata1()
 
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint
-global Int_revolute tend tstart tstep q0 Int_trans Ground
+global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground
 global Ncoord Nconst Ntime w omega0 NRparameters Driver
 
 NRparameters.tolerance = 0.000001;
@@ -35,24 +35,24 @@ end
 %revolute joints
 for k=1:Nrevolute
     line=line+1;
-    Int_revolute(k).i=H(line,1)';
-    Int_revolute(k).j=H(line,2)';
-    Int_revolute(k).spi=H(line,3:4)';
-    Int_revolute(k).spj=H(line,5:6)';
+    Jnt_revolute(k).i=H(line,1)';
+    Jnt_revolute(k).j=H(line,2)';
+    Jnt_revolute(k).spi=H(line,3:4)';
+    Jnt_revolute(k).spj=H(line,5:6)';
 end
 %translation joints
 for k=1:Ntrans
     line=line+1;
-    Int_trans (k).i=H(line,1)';
-    Int_trans (k).j=H(line,2)';
-    Int_trans (k).spPi=H(line,3:4)';
-    Int_trans (k).spQi=H(line,5:6)';
-    Int_trans (k).spPj=H(line,7:8)';
-    Int_trans (k).spQj=H(line,9:10)';
-    Int_trans(k).spi=Int_trans(k).spPi-Int_trans(k).spQi
-    Int_trans(k).spj=Int_trans(k).spPj-Int_trans(k).spQj
-    Int_trans(k).hj=[Int_trans(k).spj(2,1);...
-    -Int_trans(k).spj(1,1)];
+    Jnt_trans (k).i=H(line,1)';
+    Jnt_trans (k).j=H(line,2)';
+    Jnt_trans (k).spPi=H(line,3:4)';
+    Jnt_trans (k).spQi=H(line,5:6)';
+    Jnt_trans (k).spPj=H(line,7:8)';
+    Jnt_trans (k).spQj=H(line,9:10)';
+    Jnt_trans(k).spi=Jnt_trans(k).spPi-Jnt_trans(k).spQi
+    Jnt_trans(k).spj=Jnt_trans(k).spPj-Jnt_trans(k).spQj
+    Jnt_trans(k).hj=[Jnt_trans(k).spj(2,1);...
+    -Jnt_trans(k).spj(1,1)];
 end
 
 %TO DO
