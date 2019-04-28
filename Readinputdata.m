@@ -103,7 +103,7 @@ w=Driver(k).vel;
 
 
 %Points of interest
-for k=1:NPointsInt
+for k=1:Npointsint
     line=line+1;
     Points_int(k).i=H(line,1);
     Points_int(k).spP=H(line,2:3);

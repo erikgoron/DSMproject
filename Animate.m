@@ -1,4 +1,41 @@
+% .... ANIMATION
+%how many times to repeat
+repeatAnimation=5;
+%option to play animation frame by frame by pressing enter
+frameByFrame=false;
+%animation speed, default = 1= realtime
+frameDelay=0.1; %or manually set tstep after reading input data
+%stop animation anytime with Ctrl+C
 
+
+%%%%%%%%%% ....... COLLECT THE POINTS that we wanna draw for each body
+%at the moment its revolute joints and points of interest
+
+%initialize
+%using cell data type, indexing with {i}
+bodyPoints=cell(Nbody,1);
+%to find out the limits of the plot
+
+for k = 1:Nrevolute
+    i=Jnt_revolute(k).i;
+    j=Jnt_revolute(k).j;
+    spPi=Jnt_revolute(k).spPi;
+    spPj=Jnt_revolute(k).spPj;
+    bodyPoints{i}=[bodyPoints{i} spPi'];
+    bodyPoints{j}=[bodyPoints{j} spPj'];
+    
+end
+
+%TODO: other joints
+   
+for k = 1:Npointsint
+    i=Points_int(k).i;
+    spP=Points_int(k).spP;
+    bodyPoints{i}=[bodyPoints{i} spP'];
+
+end
+
+%%%%%%% ..... GET RESULTS FROM SIMULATION
 PositionsT=Positions';
 
 for i=1:Nbody
@@ -10,9 +47,10 @@ for i=1:Nbody
     body{i}.Variables=PositionsT(:,i1:i2);
     body{i}.Properties.VariableNames={'X','Y','PHI'};
 end
+%read data like this: body{2}.X
 
 
-%read date with body{2}.X
+%%%%%% ...... PLOTTING
 
 %...    for each timestep, draw the bodies
 %as lines between center and joints/POIs
@@ -26,6 +64,8 @@ minplot=[0 0];
 
 %rotation matrix for local coords
 A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
+
+
 %in the first iteration,dont plot, calculate the xlim and ylim
 %so that we have a constant sized window. 
 %then repeat the plotting a few times
@@ -82,4 +122,5 @@ end
 
         
         
+
 
