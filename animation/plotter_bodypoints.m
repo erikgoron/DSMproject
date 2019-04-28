@@ -1,13 +1,13 @@
 
 %initialize
-bodyPoints=cell(NBody,1);
+bodyPoints=cell(Nbody,1);
 %to find out the limits of the plot
 
-for k = 1:NRevolute
-    i=Jnt_Rev(k).i;
-    j=Jnt_Rev(k).j;
-    spPi=Jnt_Rev(k).spPi;
-    spPj=Jnt_Rev(k).spPj;
+for k = 1:Nrevolute
+    i=Jnt_revolute(k).i;
+    j=Jnt_revolute(k).j;
+    spPi=Jnt_revolute(k).spPi;
+    spPj=Jnt_revolute(k).spPj;
     bodyPoints{i}=[bodyPoints{i} spPi'];
     bodyPoints{j}=[bodyPoints{j} spPj'];
     
@@ -15,9 +15,9 @@ for k = 1:NRevolute
     
 end
    
-for k = 1:NPointsInt
-    i=POI(k).i;
-    spP=POI(k).spP;
+for k = 1:Npointsint
+    i=Points_int(k).i;
+    spP=Points_int(k).spP;
     bodyPoints{i}=[bodyPoints{i} spP'];
 
 end

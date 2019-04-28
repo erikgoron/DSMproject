@@ -101,17 +101,18 @@ end
 omega0=Driver(k).pos;
 w=Driver(k).vel;
 
-%Points of interest
 
-for k=1:Npointsint
+%Points of interest
+for k=1:NPointsInt
     line=line+1;
-    Points_int(k).r=H(line,1:2);
-    Points_int(k).phi=H(line,3);
+    Points_int(k).i=H(line,1);
+    Points_int(k).spP=H(line,2:3);
 end
+
 line=line+1;
 tstart=H(line,1);
 tstep=H(line,3);
 tend=H(line,2);
-tseries=H(line,1):H(line,3):H(line,2);
+%tseries=H(line,1):H(line,3):H(line,2);
 
 end
