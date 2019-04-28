@@ -70,7 +70,8 @@ A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 
 %in the first iteration,dont plot, calculate the xlim and ylim
 %so that we have a constant sized window. 
-%then repeat the plotting a few times
+%then repeat the plotting a few time
+fig1=figure;
 for doPlot=[0,ones(1,repeatAnimation)]
 for kt=1:length(t)
     for i=1:Nbody
@@ -112,6 +113,10 @@ for kt=1:length(t)
            
             %makes the program wait for a bit, 
             pause(frameDelay);
+            if ~ishandle(fig1)
+                break;
+            end
+            
         end
         
     end
@@ -119,6 +124,10 @@ for kt=1:length(t)
     for l=lines
          l.delete()
     end
+
+end
+if ~ishandle(fig1)
+    break;
 end
 end
 
