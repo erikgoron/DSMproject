@@ -1,4 +1,6 @@
 % .... ANIMATION
+
+close all
 %how many times to repeat
 repeatAnimation=5;
 %option to play animation frame by frame by pressing enter
@@ -19,10 +21,10 @@ bodyPoints=cell(Nbody,1);
 for k = 1:Nrevolute
     i=Jnt_revolute(k).i;
     j=Jnt_revolute(k).j;
-    spPi=Jnt_revolute(k).spPi;
-    spPj=Jnt_revolute(k).spPj;
-    bodyPoints{i}=[bodyPoints{i} spPi'];
-    bodyPoints{j}=[bodyPoints{j} spPj'];
+    spPi=Jnt_revolute(k).spi;
+    spPj=Jnt_revolute(k).spj;
+    bodyPoints{i}=[bodyPoints{i} spPi];
+    bodyPoints{j}=[bodyPoints{j} spPj];
     
 end
 

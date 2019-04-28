@@ -24,8 +24,13 @@ Flag.Gamma=0;
 %get body(i). from q
 Preprocessdata(q); 
 
-[Phi,Jac,~,~] = KinematicConstraints(body,time);
+[Phi,~,~,~] = KinematicConstraints(body,time);
 
+
+%... Evaluate the Jacobian matrix
+    Flag.Position = 0;
+    Flag.Jacobian = 1;
+    [~,Jac,~,~]    = KinematicConstraints(body,time);
 
 %... Calculate the iteration step
     deltaq         = Jac\Phi;

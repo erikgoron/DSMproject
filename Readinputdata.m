@@ -1,5 +1,3 @@
-function Readinputdata()
-
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint
 global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground Points_int
 global Ncoord Nconst w omega0 NRparameters Driver
@@ -114,5 +112,3 @@ tstart=H(line,1);
 tstep=H(line,3);
 tend=H(line,2);
 %tseries=H(line,1):H(line,3):H(line,2);
-
-end

@@ -5,7 +5,7 @@ global q  Jac tstart tstep tend time qd qdd q0
 %iteration
 %#ok<*SAGROW>
 
-Readinputdata()
+Readinputdata
 
 k = 0;
 for time = tstart : tstep : tend
@@ -33,8 +33,6 @@ Accelerations(:,k) = qdd;
 %... Estimation of positions for next time step
 q0 = q;
 end 
-figure; hold on;
-plot (Positions(10,:),Positions(11,:),'ro')
-quiver(Positions(7,:),Positions(8,:),Velocities(7,:),Velocities(8,:));
-quiver(Positions(7,:),Positions(8,:),Accelerations(7,:),Accelerations(8,:));
+
+Animate
 
