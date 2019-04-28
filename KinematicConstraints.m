@@ -1,4 +1,4 @@
-function [Phi,Jac,Niv,Gamma]=KinematicConstraints(body,time)
+function [Phi,Jac,Niu,Gamma]=KinematicConstraints(body,time)
 
 global Nrevolute
 global Flag Nline Ntrans Ground
@@ -6,18 +6,18 @@ global Ncoord Nconst w Driver
 
 Phi=zeros(Nconst,1);
 Jac=zeros(Nconst,Ncoord);
-Niv=zeros(Ncoord,1);
+Niu=zeros(Ncoord,1);
 Gamma=zeros(Ncoord,1);
 
 Nline=1;
 
 for k=1:Nrevolute
-    [Phi,Jac,Niv,Gamma]=JointRevolute(Phi,Jac,Niv,Gamma,Nline,body,k);
+    [Phi,Jac,Niu,Gamma]=JointRevolute(Phi,Jac,Niu,Gamma,Nline,body,k);
     Nline=Nline+2;
 end
 
 for k=1:Ntrans
-     [Phi,Jac,Niv,Gamma]=Trans(Phi,Jac,Niv,Gamma,Nline,body,k);
+     [Phi,Jac,Niu,Gamma]=Trans(Phi,Jac,Niu,Gamma,Nline,body,k);
      Nline=Nline+2;
 end
 
@@ -44,8 +44,8 @@ end
 %    [Phi]=simpleconstraints(Phi,body,Nline);
 %end
 
-if (Flag.Niv == 1)
-    Niv(end)= w;
+if (Flag.Niu == 1)
+    Niu(end)= w;
     
 end
 

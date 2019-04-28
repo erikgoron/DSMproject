@@ -18,7 +18,7 @@ k = k+1;
 %... Evaluate the Position Constraint Equations
 Flag.Position = 1;
 Flag.Jacobian = 0;
-Flag.Niv=0;
+Flag.Niu=0;
 Flag.Gamma=0;
 
 Preprocessdata(q); 

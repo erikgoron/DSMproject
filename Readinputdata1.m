@@ -1,8 +1,8 @@
 function Readinputdata1()
 
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint
-global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground
-global Ncoord Nconst Ntime w omega0 NRparameters Driver
+global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground Points_int
+global Ncoord Nconst w omega0 NRparameters Driver
 
 NRparameters.tolerance = 0.000001;
 NRparameters.MaxIteration = 20;
@@ -23,7 +23,7 @@ Nground=H(1,6);
 Nsimple=H(1,7);
 Ndriver=H(1,8);
 Npointsint=H(1,9);
-Ncoord=3*Nbody
+Ncoord=3*Nbody;
 Nconst=2*Nrevolute+2*Ntrans+Nrevrev+Nrevtra+...
     3*Nground+Nsimple+Ndriver;
 % Initial Positions
@@ -49,8 +49,8 @@ for k=1:Ntrans
     Jnt_trans (k).spQi=H(line,5:6)';
     Jnt_trans (k).spPj=H(line,7:8)';
     Jnt_trans (k).spQj=H(line,9:10)';
-    Jnt_trans(k).spi=Jnt_trans(k).spPi-Jnt_trans(k).spQi
-    Jnt_trans(k).spj=Jnt_trans(k).spPj-Jnt_trans(k).spQj
+    Jnt_trans(k).spi=Jnt_trans(k).spPi-Jnt_trans(k).spQi;
+    Jnt_trans(k).spj=Jnt_trans(k).spPj-Jnt_trans(k).spQj;
     Jnt_trans(k).hj=[Jnt_trans(k).spj(2,1);...
     -Jnt_trans(k).spj(1,1)];
 end
@@ -105,8 +105,8 @@ w=Driver(k).vel;
 
 for k=1:Npointsint
     line=line+1;
-    POI(k).r=H(line,1:2);
-    POI(k).phi=H(line,3);
+    Points_int(k).r=H(line,1:2);
+    Points_int(k).phi=H(line,3);
 end
 line=line+1;
 tstart=H(line,1);

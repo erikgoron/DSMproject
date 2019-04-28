@@ -1,4 +1,4 @@
-function [Phi,Jac,Niv,Gamma]=Trans(Phi,Jac,Niv,Gamma,Nline,body,k)
+function [Phi,Jac,Niu,Gamma]=Trans(Phi,Jac,Niu,Gamma,Nline,body,k)
 
 global Jnt_trans Flag
 i=Jnt_trans(k).i;

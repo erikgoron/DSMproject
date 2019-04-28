@@ -8,12 +8,12 @@ Preprocessdata(q)
 
 %... Evaluate the Jacobian matrix and right-hand-side of velocity equations Flags.Position = 0;
 Flag.Jacobian = 1;
-Flag.Niv = 1;
+Flag.Niu = 1;
 
-[~,Jac,Niv,~] = KinematicConstraints(body,time);
+[~,Jac,Niu,~] = KinematicConstraints(body,time);
 %
 %... Obtain the system velocities
-qd = Jac\Niv;
+qd = Jac\Niu;
 %... Finish function
 end
        

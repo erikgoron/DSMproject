@@ -1,4 +1,4 @@
-function [Phi,Jac,Niv,Gamma]= JointRevolute(Phi,Jac,Niv,Gamma,Nline,body,k)
+function [Phi,Jac,Niu,Gamma]= JointRevolute(Phi,Jac,Niu,Gamma,Nline,body,k)
 
 global Flag Jnt_revolute 
     i=Jnt_revolute(k).i;
