@@ -21,6 +21,7 @@ Flag.Jacobian = 1;
 Flag.Niu=0;
 Flag.Gamma=0;
 
+%get body(i). from q
 Preprocessdata(q); 
 
 [Phi,Jac,~,~] = KinematicConstraints(body,time);

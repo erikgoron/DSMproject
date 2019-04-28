@@ -3,7 +3,7 @@ function [Phi,Jac,Niu,Gamma]=Trans(Phi,Jac,Niu,Gamma,Nline,body,k)
 global Jnt_trans Flag
 i=Jnt_trans(k).i;
 j=Jnt_trans(k).j;
-i1=Nline
+i1=Nline;
 i2=i1+1;
 
 if (Flag.Position==1 || Flag.Jacobian==1 || Flag.Gamma==1)
