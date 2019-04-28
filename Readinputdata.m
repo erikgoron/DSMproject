@@ -1,4 +1,4 @@
-function Readinputdata1()
+function Readinputdata()
 
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint
 global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground Points_int

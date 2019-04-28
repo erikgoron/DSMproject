@@ -5,7 +5,7 @@ global q  Jac tstart tstep tend time qd qdd q0
 %iteration
 %#ok<*SAGROW>
 
-Readinputdata1()
+Readinputdata()
 
 k = 0;
 for time = tstart : tstep : tend
