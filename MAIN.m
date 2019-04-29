@@ -18,7 +18,7 @@ k = k + 1;
 [q ] = PositionAnalysis(q0,time);
 
 %... Velocity Analysis
-[qd,Jac] = VelocityAnalysis(q0,time);
+[qd,Jac] = VelocityAnalysis(q,time);
 
 % %... Acceleration Analysis
 [qdd ] = AccelerationAnalysis(q0,Jac,time);

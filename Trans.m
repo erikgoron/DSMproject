@@ -11,11 +11,7 @@ if (Flag.Position==1 || Flag.Jacobian==1 || Flag.Gamma==1)
     sij=body(i).r+body(i).A*Jnt_trans(k).spPi...
         -body(j).r-body(j).A*Jnt_trans(k).spPj;
     hj=body(j).A*Jnt_trans(k).hj;
-    sidot=body(i).B*Jnt_trans(k).spi;
-    sijdot=body(i).rd+body(i).B*Jnt_trans(k).spPi...
-        -body(j).rd-body(j).B*Jnt_trans(k).spPj;
-    hj=body(j).B*Jnt_trans(k).hj;
-  
+    
 end
 
 if (Flag.Position==1)
@@ -33,6 +29,11 @@ if (Flag.Jacobian==1)
 end
 
 if (Flag.Gamma==1)
+    sidot=body(i).B*Jnt_trans(k).spi;
+    sijdot=body(i).rd+body(i).B*Jnt_trans(k).spPi...
+        -body(j).rd-body(j).B*Jnt_trans(k).spPj;
+    hj=body(j).B*Jnt_trans(k).hj;
+  
      Gamma(i1:i2,1)=[-dot(sidot,body(j).B*Jnt_trans(k).hj*body(j).thetad)+...
          dot(si,body(j).A*Jnt_trans(k).hj*(body(j).thetad^2))-dot(hjdot,body(i).B*Jnt_trans(k).spi*body(i).thetad)+...
          dot(hj,body(i).A*Jnt_trans(k).spi*(body(i).thetad^2));
