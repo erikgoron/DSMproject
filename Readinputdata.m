@@ -4,8 +4,9 @@ global Ncoord Nconst w omega0 NRparameters Driver
 
 NRparameters.tolerance = 0.000001;
 NRparameters.MaxIteration = 20;
-
-Filename= uigetfile('*.rtf','Select Model');
+if not(exist('Filename','var'))
+    Filename= uigetfile('*.rtf','Select Model');
+end
 %read data from input file
 H=dlmread(Filename);
 % store in vars
