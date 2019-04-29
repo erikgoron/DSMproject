@@ -21,7 +21,7 @@ k = k + 1;
 [qd,Jac] = VelocityAnalysis(q0,time);
 
 % %... Acceleration Analysis
-[qdd ] = AccelerationAnalysis(q0,Jac,time);
+[qdd ] = AccelerationAnalysis(q0,qd,Jac,time);
 % %
 % %... Store variables for reporting
  t(k)= time;

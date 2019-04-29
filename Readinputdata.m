@@ -96,6 +96,7 @@ for k=1:Ndriver
     Driver(k).acc=H(line,5);%acceleration
 end
 
+%%% Just one driver
 omega0=Driver(k).pos;
 w=Driver(k).vel;
 

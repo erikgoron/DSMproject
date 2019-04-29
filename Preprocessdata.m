@@ -1,7 +1,7 @@
-function Preprocessdata(q)
+function [body]=Preprocessdata(q,qd)
 
 global Nbody
-global body Flag qd
+global Flag
 
 for i=1:Nbody
     i1=3*i-2;
@@ -14,8 +14,8 @@ for i=1:Nbody
     body(i).A=[cost -sint; sint cost];
     body(i).B=[-sint -cost; cost -sint];
     if (Flag.Gamma==1)
-    body(i).rd=qd(i1:i2,1);
-    body(i).thetad=qd(i3,1);
+        body(i).rd=qd(i1:i2,1);
+        body(i).thetad=qd(i3,1);
     end
    
 end
