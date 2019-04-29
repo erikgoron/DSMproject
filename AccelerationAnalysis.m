@@ -15,3 +15,4 @@ qdd = Jac\Gamma;
 
 %... Finish function
 end
+%gvv
