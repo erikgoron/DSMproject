@@ -4,6 +4,7 @@ global q  Jac tstart tstep tend time qd qdd q0
 %comment to suppress warning about "variable is changing size every
 %iteration
 %#ok<*SAGROW>
+Filename='4bar.rtf';
 
 Readinputdata
 
@@ -12,16 +13,15 @@ for time = tstart : tstep : tend
 k = k + 1;
  
 
-%blabla
 %... Position Analysis
 
 [q ] = PositionAnalysis(q0,time);
 
 %... Velocity Analysis
-[qd,Jac] = VelocityAnalysis(q0,time);
+[qd,Jac] = VelocityAnalysis(q,time);
 
 % %... Acceleration Analysis
-[qdd ] = AccelerationAnalysis(q0,Jac,time);
+[qdd ] = AccelerationAnalysis(q,qd,Jac,time);
 % %
 % %... Store variables for reporting
  t(k)= time;
@@ -34,5 +34,5 @@ Accelerations(:,k) = qdd;
 q0 = q;
 end 
 
-Animate
+%Animate
 
