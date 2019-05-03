@@ -3,7 +3,7 @@ function    [q     ] = PositionAnalysis(q,time)
 %                  the mechanical system using the Newton-Raphson
 % method to solve the position constraint equations %%
 %... Access the global variables
-global NRparameters Flag Phi Jac body 
+global NRparameters Flag Phi Jac  
 
 %... Setup a very large initial error
 error = 10.0*NRparameters.tolerance;
@@ -17,12 +17,12 @@ k = k+1;
 
 %... Evaluate the Position Constraint Equations
 Flag.Position = 1;
-Flag.Jacobian = 1;
+Flag.Jacobian = 0;
 Flag.Niu=0;
 Flag.Gamma=0;
 
 %get body(i). from q
-Preprocessdata(q); 
+body = Preprocessdata(q,false); 
 
 [Phi,~,~,~] = KinematicConstraints(body,time);
 

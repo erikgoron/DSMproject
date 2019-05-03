@@ -39,7 +39,8 @@ end
 
 %%%%%%% ..... GET RESULTS FROM SIMULATION
 PositionsT=Positions';
-
+% turn off a warning 
+warning('off','MATLAB:table:RowsAddedExistingVars');
 for i=1:Nbody
     %cell array of tables (1 for each body)
     body{i}=table;

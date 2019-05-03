@@ -1,11 +1,12 @@
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint
-global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground Points_int
+global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground Points_int %Jnt_RevRev Jnt_RevTra
 global Ncoord Nconst w omega0 NRparameters Driver
 
 NRparameters.tolerance = 0.000001;
 NRparameters.MaxIteration = 20;
-
-Filename= uigetfile('*.rtf','Select Model');
+if not(exist('Filename','var'))
+    Filename= uigetfile('*.rtf','Select Model');
+end
 %read data from input file
 H=dlmread(Filename);
 % store in vars
@@ -71,8 +72,11 @@ for k=1:Nrevtra
 %     Jnt_RevTra(k).i=H(line,1);
 %     Jnt_RevTra(k).j=H(line,2);
 %     Jnt_RevTra(k).spPi=H(line,3:4);
-%     Jnt_RevTra(k).spPj=H(line,7:8);
-%     Jnt_RevTra(k).spQj=H(line,9:10);
+%     Jnt_RevTra(k).spPj=H(line,5:6);
+%     Jnt_RevTra(k).spQj=H(line,7:8);
+%     Jnt_RevTra(k).l0=H(line,9);
+%     Jnt_RevTra(k).hj=[-Jnt_trans(k).spj(2,1);...
+%     Jnt_RevTra(k).spj(1,1)];
 end
 
 %Grounded bodies
@@ -96,6 +100,7 @@ for k=1:Ndriver
     Driver(k).acc=H(line,5);%acceleration
 end
 
+%%% Just one driver
 omega0=Driver(k).pos;
 w=Driver(k).vel;
 

@@ -3,8 +3,8 @@ function [qd,Jac] = VelocityAnalysis(q,time)
 % the mechanical system
 
 %... Access the global variables
-global Flag body 
-Preprocessdata(q)
+global Flag 
+body=Preprocessdata(q,false);
 
 %... Evaluate the Jacobian matrix and right-hand-side of velocity equations Flags.Position = 0;
 Flag.Jacobian = 1;
