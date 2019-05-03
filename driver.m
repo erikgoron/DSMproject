@@ -9,6 +9,7 @@ z(3)=body(Driver(k).i).theta;
 if (Flag.Position==1)
    Phi(Nline,1)=z(Driver(k).coord)-Driver(k).pos-Driver(k).vel*time-0.5*time^2*Driver(k).acc;
 end
+
 if (Flag.Jacobian==1)
     Jac(Nline,Driver(k).i*3+Driver(k).coord-3)=1;
 end
