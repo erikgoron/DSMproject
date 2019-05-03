@@ -12,7 +12,7 @@ global Flag Jnt_RevTra
     end
         
     if (Flag.Position==1)
-        Phi=dot(hj,d);
+        Phi(Nline,1)=dot(hj,d);
     end
     
     if (Flag.Jacobian==1)

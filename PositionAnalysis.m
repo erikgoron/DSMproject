@@ -3,7 +3,7 @@ function    [q     ] = PositionAnalysis(q,time)
 %                  the mechanical system using the Newton-Raphson
 % method to solve the position constraint equations %%
 %... Access the global variables
-global NRparameters Flag Phi Jac  
+global NRparameters Flag Phi Jac 
 
 %... Setup a very large initial error
 error = 10.0*NRparameters.tolerance;
