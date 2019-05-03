@@ -82,7 +82,9 @@ end
 %Grounded bodies
 for k=1:Nground
     line=line+1;
-    Ground(k).i=H(line,1)';
+    Ground(k).i=H(line,1)'
+    Ground(k).r=H(line,2:3)';
+    Ground(k).theta=H(line,4)';
 end
 
 %TO DO simple contstraints
@@ -99,8 +101,6 @@ for k=1:Ndriver
     Driver(k).vel=H(line,4);%velocity
     Driver(k).acc=H(line,5);%acceleration
 end
-
-%%% Just one driver
 omega0=Driver(k).pos;
 w=Driver(k).vel;
 

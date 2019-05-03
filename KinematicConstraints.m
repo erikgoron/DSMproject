@@ -1,8 +1,8 @@
 function [Phi,Jac,Niu,Gamma]=KinematicConstraints(body,time)
 
-global Nrevolute
-global Flag Nline Ntrans Ground Nrevtra
-global Ncoord Nconst w Driver
+global Nrevolute Ndriver
+global Flag Nline Ntrans Nground Nrevtra
+global Ncoord Nconst w Driver Ground
 
 Phi=zeros(Nconst,1);
 Jac=zeros(Nconst,Ncoord);
@@ -27,32 +27,36 @@ for k=1:Nrevtra
 end
 
 %Ground
-if (Flag.Position==1)
-    Phi(Nline:Nline+1)=body(Ground(1).i).r;
-    Phi(Nline+2)=body(Ground(1).i).theta;
-    Nline=Nline+3;
+for k=1:Nground
+     [Phi,Jac,Niu,Gamma]=ground(Phi,Jac,Niu,Gamma,Nline,body,k);
+     Nline=Nline+3
 end
 
-%driver
-if (Flag.Position==1)
-    [Phi]=driver(Phi,body,Nline,time);
+% driver
+for k=1:Ndriver 
+    [Phi,Jac,Niu,Gamma]=driver(Phi,Jac,Niu,Gamma,Nline,body,k,time);
+    Nline=Nline+1;
 end
-
-if (Flag.Jacobian==1)
-    Jac(Nline:Nline+2,(Ground(1).i)*3-2:(Ground(1).i)*3)=eye(3); %ground
-    Nline=Nline+3;
-    Jac(Nline,Driver(1).i*Driver(1).coord)=1; %driver
-end
-
-
-%if (Flag.Position==1)
+% 
+% if (Flag.Jacobian==1)
+%     Jac(Nline,Driver(1).i*Driver(1).coord)=1; %driver
+% end
+% 
+% %if (Flag.Position==1)
 %    [Phi]=simpleconstraints(Phi,body,Nline);
 %end
 
-if (Flag.Niu == 1)
-    Niu(end)= w;
-    
 end
 
 end
+
+% if (Flag.Position==1)
+%     [Phi]=driver(Phi,body,Nline,time);
+%     Nline=Nline+1;
+% end
+
+end
+
+
+
 

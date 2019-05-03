@@ -1,5 +1,5 @@
 clear all
-global q  Jac tstart tstep tend time qd qdd q0  
+global q  Jac tstart tstep tend time qd qdd q0 
 
 %comment to suppress warning about "variable is changing size every
 %iteration
@@ -12,7 +12,6 @@ k = 0;
 for time = tstart : tstep : tend
 k = k + 1;
  
-
 %... Position Analysis
 
 [q ] = PositionAnalysis(q0,time);
