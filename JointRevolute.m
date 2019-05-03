@@ -18,7 +18,7 @@ global Flag Jnt_revolute
     end
     
     if (Flag.Gamma==1)
-        Gamma(i1:i2,1)=body(i).A*Jnt_revolute(k).spi*body(i).thetad^2-body(j).A*Jnt_revolute(k).spi*body(j).thetad^2;
+        Gamma(i1:i2,1)=body(i).A*Jnt_revolute(k).spi*body(i).thetad^2-body(j).A*Jnt_revolute(k).spj*body(j).thetad^2;
     end
     
 end
