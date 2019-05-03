@@ -46,9 +46,7 @@ end
 %    [Phi]=simpleconstraints(Phi,body,Nline);
 %end
 
-end
 
-end
 
 % if (Flag.Position==1)
 %     [Phi]=driver(Phi,body,Nline,time);
