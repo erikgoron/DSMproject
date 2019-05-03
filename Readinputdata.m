@@ -84,7 +84,7 @@ end
 %Grounded bodies
 for k=1:Nground
     line=line+1;
-    Ground(k).i=H(line,1)'
+    Ground(k).i=H(line,1)';
     Ground(k).r=H(line,2:3)';
     Ground(k).theta=H(line,4)';
 end

@@ -6,7 +6,7 @@ repeatAnimation=5;
 %option to play animation frame by frame by pressing enter
 frameByFrame=false;
 %animation speed, default = 1= realtime
-frameDelay=0.1; %or manually set tstep after reading input data
+frameDelay=0; %or manually set tstep after reading input data
 %stop animation anytime with Ctrl+C
 
 

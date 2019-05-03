@@ -29,7 +29,7 @@ end
 %Ground
 for k=1:Nground
      [Phi,Jac,Niu,Gamma]=ground(Phi,Jac,Niu,Gamma,Nline,body,k);
-     Nline=Nline+3
+     Nline=Nline+3;
 end
 
 % driver

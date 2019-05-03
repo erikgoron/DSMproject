@@ -83,7 +83,7 @@ A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 %then repeat the plotting a few time
 fig1=figure;
 for doPlot=1   %[0,ones(1,repeatAnimation)]
-for kt=1:length(t)
+for kt=1:1
     for i=1:Nbody
         if i==Ground(1).i
             continue;
@@ -118,7 +118,7 @@ for kt=1:length(t)
         %to pause at every timestep until user
         %presses enter
         if frameByFrame
-            input('press enter','s');
+            break
         else
            
             %makes the program wait for a bit, 
