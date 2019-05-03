@@ -1,7 +1,7 @@
 function [Phi,Jac,Niu,Gamma]=KinematicConstraints(body,time)
 
 global Nrevolute Ndriver
-global Flag Nline Ntrans Nground Nrevtra
+global Flag Nline Ntrans Nground Nrevtra Nsimple
 global Ncoord Nconst w Driver Ground
 
 Phi=zeros(Nconst,1);
@@ -37,21 +37,11 @@ for k=1:Ndriver
     [Phi,Jac,Niu,Gamma]=driver(Phi,Jac,Niu,Gamma,Nline,body,k,time);
     Nline=Nline+1;
 end
-% 
-% if (Flag.Jacobian==1)
-%     Jac(Nline,Driver(1).i*Driver(1).coord)=1; %driver
-% end
-% 
-% %if (Flag.Position==1)
-%    [Phi]=simpleconstraints(Phi,body,Nline);
-%end
 
-
-
-% if (Flag.Position==1)
-%     [Phi]=driver(Phi,body,Nline,time);
-%     Nline=Nline+1;
-% end
+for k=1:Nsimple
+    [Phi,Jac,Niu,Gamma]=Simplecons(Phi,Jac,Niu,Gamma,Nline,body,k,time);
+    Nline=Nline+1;
+end 
 
 end
 

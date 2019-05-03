@@ -90,7 +90,8 @@ end
 %TO DO simple contstraints
 for k=1:Nsimple
     line=line+1;
-    %Simple constraints here
+    Simple(k).i=H(line,1);
+    Simple(k).coord=H(line,2);
 end
 %Drivers
 for k=1:Ndriver
