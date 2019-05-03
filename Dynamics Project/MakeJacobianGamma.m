@@ -28,16 +28,16 @@ end
 %   Contribution of Rev-Rev joints
 Nline = 1;
 for k=1:Nrevrev
-    [Phi,Jac,Niu,Gamma] = Jnt_revrev(Phi,Jac,Niu,Gamma,Nline,Body,...
-        Jnt_revrev,k);
+    [Phi,Jac,Niu,Gamma] = Jnt_RevRev(Phi,Jac,Niu,Gamma,Nline,Body,...
+        Jnt_RevRev,k);
     Nline=Nline+1;
 end
 
 %   Contribution of Rev-Trans joints
 Nline = 1;
 for k=1:Nrevtra
-    [Phi,Jac,Niu,Gamma] = Jnt_revtra(Phi,Jac,Niu,Gamma,Nline,Body,...
-        Jnt_revtra,k);
+    [Phi,Jac,Niu,Gamma] = Jnt_RevTra(Phi,Jac,Niu,Gamma,Nline,Body,...
+        Jnt_RevTra,k);
     Nline=Nline+1;
 end
 
