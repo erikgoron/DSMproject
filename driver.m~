@@ -15,10 +15,10 @@ if (Flag.Jacobian==1)
 end
 
 if (Flag.Gamma==1)
-    Gamma(Nline,1)=Driver(k).acc;
+    Gamma(Nline,1)=
 end
 
 if (Flag.Niu == 1)
-    Niu(Nline,1)=Driver(k).vel+Driver(k).acc*time;
+    Niu(Nline,1)=Driver(k).vel+Driver(k).acc*time;Driver(k).acc;
 end
 end
