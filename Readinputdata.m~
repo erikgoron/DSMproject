@@ -1,16 +1,14 @@
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint
 global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground Points_int Jnt_RevRev Jnt_RevTra
-global Ncoord Nconst NRparameters Driver Simple
+global Ncoord Nconst w omega0 NRparameters Driver Simple
 
 NRparameters.tolerance = 0.000001;
 NRparameters.MaxIteration = 20;
 if not(exist('Filename','var'))
     Filename= uigetfile('*.rtf','Select Model');
 end
-
 %read data from input file
 H=dlmread(Filename);
-
 % store in vars
 line=1;
 Nbody=H(1,1);
@@ -65,13 +63,13 @@ end
 % RevRev joints
 for k=1:Nrevrev
     line=line+1;
-    Jnt_RevRev(k).i=H(line,1);
-    Jnt_RevRev(k).j=H(line,2);
-    Jnt_RevRev(k).d0=H(line,3);
-    Jnt_RevRev(k).spPi=H(line,4:5);
-    Jnt_RevRev(k).spQi=H(line,6:7);
-    Jnt_RevRev(k).spPj=H(line,8:9);
-    Jnt_RevRev(k).spQj=H(line,10:11);
+%     Jnt_RevRev(k).i=H(line,1);
+%     Jnt_RevRev(k).j=H(line,2);
+%     Jnt_RevRev(k).d0=H(line,3);
+%     Jnt_RevRev(k).spPi=H(line,4:5);
+%     Jnt_RevRev(k).spQi=H(line,6:7);
+%     Jnt_RevRev(k).spPj=H(line,8:9);
+%     Jnt_RevRev(k).spQj=H(line,10:11);
 end
 % RevTra joints
 for k=1:Nrevtra

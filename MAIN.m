@@ -5,7 +5,7 @@ global q  Jac tstart tstep tend time qd qdd q0
 %iteration
 %#ok<*SAGROW>
 %  Filename='4bar.rtf';
- Filename='strandbeest_v1.rtf';
+
 
 Readinputdata
 
