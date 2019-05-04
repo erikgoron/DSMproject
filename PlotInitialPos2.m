@@ -4,9 +4,9 @@ close all
 %how many times to repeat
 repeatAnimation=5;
 %option to play animation frame by frame by pressing enter
-frameByFrame=false;
+frameByFrame=true;
 %animation speed, default = 1= realtime
-frameDelay=0; %or manually set tstep after reading input data
+frameDelay=0.1; %or manually set tstep after reading input data
 %stop animation anytime with Ctrl+C
 
 
@@ -41,13 +41,22 @@ end
 PositionsT=Positions';
 % turn off a warning 
 warning('off','MATLAB:table:RowsAddedExistingVars');
+% for i=1:Nbody
+%     %cell array of tables (1 for each body)
+%     body{i}=table;
+%     %using table because i can dynamically assign variables 
+%     i2=i*3; % 3 6 9
+%     i1=i2-2; % 1 4 7
+%     body{i}.Variables=PositionsT(:,i1:i2);
+%     body{i}.Properties.VariableNames={'X','Y','PHI'};
+% end
 for i=1:Nbody
     %cell array of tables (1 for each body)
     body{i}=table;
     %using table because i can dynamically assign variables 
     i2=i*3; % 3 6 9
     i1=i2-2; % 1 4 7
-    body{i}.Variables=PositionsT(:,i1:i2);
+    body{i}.Variables=q0mat(i,1:3);
     body{i}.Properties.VariableNames={'X','Y','PHI'};
 end
 %read data like this: body{2}.X
@@ -73,8 +82,8 @@ A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 %so that we have a constant sized window. 
 %then repeat the plotting a few time
 fig1=figure;
-for doPlot=[0,ones(1,repeatAnimation)]
-for kt=1:length(t)
+for doPlot=1   %[0,ones(1,repeatAnimation)]
+for kt=1:1
     for i=1:Nbody
         if i==Ground(1).i
             continue;
@@ -94,8 +103,8 @@ for kt=1:length(t)
 
                     hold on;
                     axis equal;
-                xlim([minplot(1) maxplot(1)]);
-                ylim([minplot(2) maxplot(2)]);
+                %xlim([minplot(1) maxplot(1)]);
+                %ylim([minplot(2) maxplot(2)]);
                 lines=[lines l];
             else
                 maxplot=max(maxplot,[px py]);
@@ -109,7 +118,7 @@ for kt=1:length(t)
         %to pause at every timestep until user
         %presses enter
         if frameByFrame
-            input('press enter','s');
+            break
         else
            
             %makes the program wait for a bit, 

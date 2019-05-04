@@ -27,9 +27,11 @@ Nconst=2*Nrevolute+2*Ntrans+Nrevrev+Nrevtra+...
     3*Nground+Nsimple+Ndriver;
 % Initial Positions
 q0=[];
+q0mat=[];
 for i=1:Nbody
     line=line+1;
     q0=[q0;H(line,1:3)'];
+    q0mat=[q0mat;H(line,1:3)];
 end
 %revolute joints
 for k=1:Nrevolute
@@ -82,7 +84,7 @@ end
 %Grounded bodies
 for k=1:Nground
     line=line+1;
-    Ground(k).i=H(line,1)'
+    Ground(k).i=H(line,1)';
     Ground(k).r=H(line,2:3)';
     Ground(k).theta=H(line,4)';
 end

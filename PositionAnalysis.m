@@ -1,51 +1,12 @@
-function    [q     ] = PositionAnalysis(q,time)
+function    [q     ] = PositionAnalysis(q0,time)
 %POSITION ANALYSIS Function to control the position analysis of
 %                  the mechanical system using the Newton-Raphson
 % method to solve the position constraint equations %%
 %... Access the global variables
-global NRparameters Flag Phi Jac 
+global NRparameters Flag 
 
-%... Setup a very large initial error
-error = 10.0*NRparameters.tolerance;
+options = optimoptions('fsolve','FunctionTolerance',1e-2,'Display','none');
 
-%... Initialize the iteration counter
-k =0;
+[q,fval,exitflag]=fsolve(@PhiEval,q0,options);
 
-%... Start the iterative procedure (Newton-Raphson Method)
-while (error >= NRparameters.tolerance)
-k = k+1;
-
-%... Evaluate the Position Constraint Equations
-Flag.Position = 1;
-Flag.Jacobian = 0;
-Flag.Niu=0;
-Flag.Gamma=0;
-
-%get body(i). from q
-body = Preprocessdata(q,false); 
-
-[Phi,~,~,~] = KinematicConstraints(body,time);
-
-
-%... Evaluate the Jacobian matrix
-    Flag.Position = 0;
-    Flag.Jacobian = 1;
-    [~,Jac,~,~]    = KinematicConstraints(body,time);
-
-%... Calculate the iteration step
-    deltaq         = Jac\Phi;
-
-%... Update positions
-q = q-deltaq;
-
-%... Evaluate the error function
-    error = max(abs(deltaq));
-    
-%... Check if the maximum number of iterations is exceeded
-    if (k>NRparameters.MaxIteration)
-        formatSpec = 'Iterations ( %d ) exceeds maximum ( %d )';
-        fprintf(formatSpec,k,NRparameters.MaxIteration);
-        break
-    end
-end
-
+assert(exitflag>=1,'Fsolve did not converge, check again with options "display" on');
