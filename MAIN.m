@@ -1,14 +1,14 @@
 clear all
-global q  Jac tstart tstep tend time qd qdd q0 
+global q  Jac tstart tstep tend time qd qdd q0 q00
 
 %comment to suppress warning about "variable is changing size every
 %iteration
 %#ok<*SAGROW>
-%  Filename='4bar.rtf';
+%   Filename='rameur.rtf';
 
 
 Readinputdata
-
+q00=q0;
 k = 0;
 for time = tstart : tstep : tend
 k = k + 1;

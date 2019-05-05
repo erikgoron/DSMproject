@@ -23,7 +23,7 @@ global Flag Jnt_RevTra
             dot(hj,body(j).B*Jnt_RevTra(k).spPj)];
     end
     
-    if(Flag.Gamma==1)
+    if (Flag.Gamma==1)
         dd = body(i).rd + body(i).B*Jnt_RevTra(k).spPi*body(i).thetad-...
             body(j).rd + body(j).B*Jnt_RevTra(k).spPj*body(j).thetad;
         Gamma(Nline,1) = dot(dd,body(j).B*Jnt_RevTra(k).spPj*body(j).thetad)+...
