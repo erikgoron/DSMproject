@@ -67,6 +67,7 @@ for k=1:Nrevrev
     line=line+1;
     Jnt_RevRev(k).i=H(line,1);
     Jnt_RevRev(k).j=H(line,2);
+    Jnt_RevRev(k).d0=H(line,3);
     Jnt_RevRev(k).spPi=H(line,3:4);
     Jnt_RevRev(k).spPj=H(line,5:6);
     Jnt_RevRev(k).d0=
