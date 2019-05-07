@@ -22,6 +22,7 @@ for k=1:Ntrans
      Nline=Nline+2;
 end
 
+% RevRev joint
 for k=1:Nrevrev
      [Phi,Jac,Niu,Gamma]=RevRev(Phi,Jac,Niu,Gamma,Nline,body,k);
      Nline=Nline+1;

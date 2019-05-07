@@ -5,8 +5,7 @@ global q  Jac tstart tstep tend time qd qdd q0 q00 body0 Flag
 %iteration
 %#ok<*SAGROW>
 
-%    Filename='rameurrevrev.rtf';
-
+% Filename='rameurrevrev.rtf';
 
 Readinputdata
 
@@ -23,7 +22,6 @@ k = 0;
 for time = tstart : tstep : tend
 k = k + 1;
  
-
 %... Position Analysis
 [q ] = PositionAnalysis(q0,time);
 

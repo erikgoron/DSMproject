@@ -13,7 +13,7 @@ global Flag Jnt_RevRev body0
     end
     
     if (Flag.Position==1)
-        Phi = dot(d,d)-d0^2;
+        Phi(Nline,1) = dot(d,d)-d0^2;
     end
     
     if (Flag.Jacobian==1)
