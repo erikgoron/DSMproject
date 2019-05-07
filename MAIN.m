@@ -5,7 +5,11 @@ global q  Jac tstart tstep tend time qd qdd q0 q00 body0 Flag
 %iteration
 %#ok<*SAGROW>
 
-Filename='rameurrevtrans.rtf';
+
+
+%Filename='rameurrevtrans.rtf';
+
+
 
 Readinputdata
 
@@ -13,11 +17,9 @@ q00=q0;
 Flag.Position = 0;
 Flag.Jacobian = 0;
 Flag.Niu=0;
-
 Flag.Gamma=0;
 [body0]=Preprocessdata(q0,qd);
 
-Readinputdata
 
 k = 0;
 for time = tstart : tstep : tend
@@ -43,5 +45,6 @@ Accelerations(:,k) = qdd;
 q0=q+ 0.9*(qd*tstep+ qdd*tstep.^2/2);
 end 
 
- %Animate
 
+Animate
+GetPointsOfInterest

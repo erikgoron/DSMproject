@@ -38,7 +38,7 @@ for k = 1:Npointsint
 end
 
 %%%%%%% ..... GET RESULTS FROM SIMULATION
-PositionsT=Positions';
+
 % turn off a warning 
 warning('off','MATLAB:table:RowsAddedExistingVars');
 % for i=1:Nbody
@@ -86,7 +86,7 @@ for doPlot=1   %[0,ones(1,repeatAnimation)]
 for kt=1:1
     for i=1:Nbody
         if i==Ground(1).i
-            continue;
+           % continue;
         end
 
         b=body{i};
