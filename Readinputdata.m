@@ -94,7 +94,7 @@ for k=1:Nrevrev
     Jnt_RevRev(k).j=H(line,2);
     Jnt_RevRev(k).spPi=H(line,3:4);
     Jnt_RevRev(k).spPj=H(line,5:6);
-    Jnt_RevRev(k).d0=
+   % Jnt_RevRev(k).d0=
 end
 % RevTra joints
 for k=1:Nrevtra
