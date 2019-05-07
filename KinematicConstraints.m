@@ -1,7 +1,7 @@
 function [Phi,Jac,Niu,Gamma]=KinematicConstraints(body,time)
 
 global Nrevolute Ndriver
-global Flag Nline Ntrans Nground Nrevtra Nsimple
+global Flag Nline Ntrans Nground Nrevtra Nsimple Nrevrev 
 global Ncoord Nconst w Driver Ground
 
 Phi=zeros(Nconst,1);
@@ -20,6 +20,12 @@ end
 for k=1:Ntrans
      [Phi,Jac,Niu,Gamma]=Trans(Phi,Jac,Niu,Gamma,Nline,body,k);
      Nline=Nline+2;
+end
+
+% RevRev joint
+for k=1:Nrevrev
+     [Phi,Jac,Niu,Gamma]=RevRev(Phi,Jac,Niu,Gamma,Nline,body,k);
+     Nline=Nline+1;
 end
 
 % Revolute trans joint
