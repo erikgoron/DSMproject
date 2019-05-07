@@ -1,9 +1,34 @@
+% Format of the input for the Kinematic Analysis Program to be developed:
+% NBody, NRevolute, NTranslation, NRev-Rev, NRev-Tra, Nground, NSimple, NDriver, NPoints
+% For each Rigid Body:
+% BodyNumber, Xinit, Yinit, PHIinit
+% For each Revolute Joint:
+% Body_i, Body_j, XI_P_i, ETA_P_i, XI_P_j, ETA_P_j
+% For each Translation Joint:
+% Body_i, Body_j, XI_P_i, ETA_P_i, XI_Q_i, ETA_Q_i, XI_P_j, ETA_P_j
+% For each Revolute-Revolute Joint:
+% Body_i, Body_j, XI_P_i, ETA_P_i, XI_P_j, ETA_P_j
+% For each Revolute-Translation Joint:
+% Body_i, Body_j, XI_P_i, ETA_P_i, XI_Q_i, ETA_Q_i, XI_P_j, ETA_P_j
+% For each Ground Constraint:
+% Bodyi, Xi, Yi, PHIi
+% For each Simple Constraint:
+% Bodyi, Coordinate (use 1 for X, or 2 for Y, or 3 for PHI)
+% For each Driver Constraint:
+% BodyNumber, Driven_Coordinate (use 1 for X, or 2 for Y, or 3 for PHI), Position_init, Veloc_init, Accel_init
+% For each Point-of-Interest to be reported:
+% Body_i, XI_P_i, ETA_P_i
+% Starting_time, Final_time, Report_time_increment
+
+
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint
 global Jnt_revolute tend tstart tstep q0 Jnt_trans Ground Points_int Jnt_RevRev Jnt_RevTra
 global Ncoord Nconst w omega0 NRparameters Driver
 
 NRparameters.tolerance = 0.000001;
 NRparameters.MaxIteration = 20;
+
+
 if not(exist('Filename','var'))
     Filename= uigetfile('*.rtf','Select Model');
 end

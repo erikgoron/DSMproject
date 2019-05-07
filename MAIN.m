@@ -8,13 +8,14 @@ global q  Jac tstart tstep tend time qd qdd q0
  Filename='strandbeest_v1.rtf';
 
 Readinputdata
-
+q=q0;qd=q0*0;qdd=q0*0;
 k = 0;
 for time = tstart : tstep : tend
 k = k + 1;
  
-%... Position Analysis
+q0=q+ qd*tstep+ qdd*tstep.^2/2;
 
+%... Position Analysis
 [q ] = PositionAnalysis(q0,time);
 
 %... Velocity Analysis
