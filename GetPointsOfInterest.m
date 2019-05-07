@@ -22,8 +22,13 @@ for kt=1:length(t)
         center=[b.X(kt);b.Y(kt)];
         point= A(b.PHI(kt))*spP;
         p=center+point;
-        PosPOI(kt,k:k+1)=p';
+        i1=2*k-1;
+        PosPOI(kt,i1:i1+1)=p';
     end
 end
 
-plot(PosPOI(:,1),PosPOI(:,2))
+%%% PLotting
+for k = 1:Npointsint
+    i1=2*k-1;
+    plot(PosPOI(:,i1),PosPOI(:,i1+1))
+end

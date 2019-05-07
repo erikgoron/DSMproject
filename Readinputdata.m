@@ -36,6 +36,9 @@ end
 %read data from input file
 H=dlmread(Filename);
 
+%check if the number of lines is correct
+assert(sum(H(1,:))+2==size(H,1),['number of lines of inputfile is',...
+      'not correct, or there is a mistake in the first line']);
 % store in vars
 line=1;
 Nbody=H(1,1);

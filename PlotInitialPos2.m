@@ -68,8 +68,13 @@ end
 %as lines between center and joints/POIs
 lines=[];
 %a color for each body
-color=rand(Nbody,3);
-
+color=rand(Nbody,3)*0.0;
+for g=ground(:,1)'
+    color(g,:)=[1 0 0];
+end
+for d=drivers(:,1)'
+    color(d,:)=[0 1 0];
+end
 %initialize the xlim and ylim values
 maxplot=[0 0];
 minplot=[0 0];

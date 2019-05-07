@@ -8,7 +8,7 @@ frameByFrame=false;
 %animation speed, default = 1= realtime
 frameDelay=0.1; %or manually set tstep after reading input data
 %stop animation anytime with Ctrl+C
-skipmod=4; %show only every n frame
+skipmod=1; %show only every n frame
 
 
 %%%%%%%%%% ....... COLLECT THE POINTS that we wanna draw for each body
@@ -77,7 +77,7 @@ A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 fig1=figure;
 for doPlot=[0,ones(1,repeatAnimation)]
     for kt=1:length(t)
-        if mod(kt,skipmod)~=0
+        if mod(kt,skipmod)~=0&&kt~=length(t)
             continue;
         end
         for i=1:Nbody

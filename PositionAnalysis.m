@@ -10,4 +10,4 @@ options = optimoptions('fsolve','FunctionTolerance',2e-1,'Display','none',...
 
 [q,fval,exitflag]=fsolve(@PhiJacEval,q0,options);
 
-assert(exitflag>=1,'Fsolve did not converge, check again with options "display" on');
+assert(exitflag>=1,'Fsolve did not converge, debug with optimoptions "display", "iter"');
