@@ -8,6 +8,7 @@ frameByFrame=false;
 %animation speed, default = 1= realtime
 frameDelay=0.1; %or manually set tstep after reading input data
 %stop animation anytime with Ctrl+C
+skipmod=4; %show only every n frame
 
 
 %%%%%%%%%% ....... COLLECT THE POINTS that we wanna draw for each body
@@ -60,6 +61,7 @@ end
 lines=[];
 %a color for each body
 color=rand(Nbody,3);
+color=color*0;
 
 %initialize the xlim and ylim values
 maxplot=[0 0];
@@ -75,6 +77,9 @@ A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 fig1=figure;
 for doPlot=[0,ones(1,repeatAnimation)]
     for kt=1:length(t)
+        if mod(kt,skipmod)~=0
+            continue;
+        end
         for i=1:Nbody
             if i==Ground(1).i
                 %continue;
@@ -125,14 +130,14 @@ for doPlot=[0,ones(1,repeatAnimation)]
                 if ~ishandle(fig1)
                     break;
                 end
-                
             end
-            
+        end
+        if kt~=length(t)
+            for l=lines
+                l.delete()
+            end
         end
         
-        for l=lines
-            l.delete()
-        end
         
     end
     if ~ishandle(fig1)

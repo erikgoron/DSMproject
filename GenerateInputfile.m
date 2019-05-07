@@ -1,65 +1,92 @@
 clear all
-load('joints_bodies');
-Nbody=size(bodies,1);
-Nrev=size(joints,1);
+%load('joints_bodiesLR');
+load('jb_v3.mat')
+% load('bodies_L_at_pi_2_rad.mat');
+% load('bodies_R_at_pi_2_rad.mat');
 
-jmat=zeros(Nrev,6);
-for k=1:16
-    jmat(k,1)=joints.b1(k);
-    jmat(k,2)=joints.b2(k);
-    if joints.b1_jloc(k)==0
-        b1_loc=bodies.P_left(joints.b1(k));
-    elseif joints.b1_jloc(k)==1
-        b1_loc=-bodies.P_left(joints.b1(k));
-    else
-        b1_loc=-5.11;
-    end
-    jmat(k,3)=b1_loc;
+%model Parameters
+jointPos=-5.11; % -5.11
+leg2length=47.08; %47.08;
+bodies.Size(2)=leg2length;
+bodies.Size(2+12)=leg2length;
+
+Nbody=size(bodies,1);
+Nrev=size(joints,1)-1;
+
+
+jmat=zeros(Nrev+1,6);
+for k=1:Nrev+1
+    b1=joints.b1(k);
+    b2=joints.b2(k);
     
-    if joints.b2_jloc(k)==0
-        b2_loc=bodies.P_left(joints.b2(k));
-    elseif joints.b2_jloc(k)==1
-        b2_loc=-bodies.P_left(joints.b2(k));
+    sz=bodies.Size(b1);
+    loc=joints.b1_jloc(k);
+    if loc==0 %left \xi negative
+        b1_loc=-sz/2;
+    elseif loc==1 %right, \xi positive
+        b1_loc=sz/2;
+    elseif loc==2
+        b1_loc=jointPos;
+    else
+        error('joint1');
     end
-    jmat(k,5)=b2_loc;
+    
+    
+    sz=bodies.Size(b2);
+    loc=joints.b2_jloc(k);
+    if loc==0 %left \xi negative
+        b2_loc=-sz/2;
+    elseif loc==1 %right, \xi positive
+        b2_loc=sz/2;
+    elseif loc==3
+        b2_loc=3/2*sz;
+    else
+        error('joint2');
+    end
+    
+    
+    jmat(k,:)=[b1,b2,b1_loc,0,b2_loc,0];
     
          
 end
-bodies.X0=bodies.X0-30;
+%bodies.X0=-bodies.X0;
+%bodies.Phi0=pi-bodies.Phi0;
+%bodies.Phi0=round(bodies.Phi0*2*pi/180,3);
+
+
 bvar=bodies.Variables;
-
-bvar(:,4)=round(bvar(:,4)*2*pi/360,3);
 bodiesmat=bvar(:,2:4);
-Nground=1;
+
+Nground=2;
 Ndriver=1;
-l1=[Nbody,Nrev,0,0,0,Nground,0,Ndriver,0];
+Npointsint=1;
+Nrevrev=1;
+l1=[Nbody,Nrev,0,Nrevrev,0,Nground,0,Ndriver,Npointsint];
+ground= [12,-bodies.Size(12)/2,0,0;...
+         24,10+bodies.Size(12)/2,0,pi];%[12,0,0,pi];
+drivers=[11,3,bodies.Phi0(11),10/360*2*pi,0];
+POI=[1,-bodies.Size(1)/2,0];
+timeseries=[0,36,1];
 
-% zeros(sum(l1),9);
-% line=1;
-% bigmat(line,1:9)=l1;
-% line=line+1;
-% bigmat(line:(line+Nbody-1),1:3)=bodiesmat;
-% line=line+Nbody;
-% bigmat(line:(line+Nrev-1),1:6)=jmat;
-% line=line+Nrev;
-% ground, driver, time
 
-ground= [12,-30,0,0];
-drivers=[11,3,1.3963,pi,0];
-timeseries=[0,2,0.105];
-
-%csvwrite('input1-rev.csv',bigmat);
 
 csvwrite('l1.csv',l1);
 csvwrite('body_input.csv',bodiesmat);
 csvwrite('joints_input.csv',jmat);
 csvwrite('grounds.csv',ground);
 csvwrite('drivers.csv',drivers);
+csvwrite('POI.csv',POI);
 csvwrite('timeseries.csv',timeseries);
 tempfiles={'l1.csv','body_input.csv','joints_input.csv',...
-    'grounds.csv','drivers.csv','timeseries.csv'};
-system(['copy /b ',strjoin(tempfiles,'+'),' strandbeest_v2.rtf']);
+    'grounds.csv','drivers.csv','POI.csv','timeseries.csv'};
+Filename='strandbeest_v3.rtf';
+
+system(['copy /b ',strjoin(tempfiles,'+'),' ',Filename]);
 system(['del ',strjoin(tempfiles,' ')]);
+
+
+Readinputdata
+PlotInitialPos2
 
 
     
