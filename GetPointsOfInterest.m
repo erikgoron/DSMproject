@@ -1,4 +1,5 @@
 PositionsT=Positions';
+VelocitiesT=Velocities';
 % turn off a warning
 warning('off','MATLAB:table:RowsAddedExistingVars');
 for i=1:Nbody
@@ -7,12 +8,12 @@ for i=1:Nbody
     %using table because i can dynamically assign variables
     i2=i*3; % 3 6 9
     i1=i2-2; % 1 4 7
-    body{i}.Variables=PositionsT(:,i1:i2);
-    body{i}.Properties.VariableNames={'X','Y','PHI'};
+    body{i}.Variables=[PositionsT(:,i1:i2),VelocitiesT(:,i1:i2)];
+    body{i}.Properties.VariableNames={'X','Y','PHI','XD','YD','PHID'};
 end
 
 PosPOI=zeros(length(t),Npointsint*2);
-
+VelPOI=zeros(length(t),Npointsint*2);
 for kt=1:length(t)
     
     for k = 1:Npointsint
@@ -24,11 +25,16 @@ for kt=1:length(t)
         p=center+point;
         i1=2*k-1;
         PosPOI(kt,i1:i1+1)=p';
+        
+        v_center=[b.XD(kt);b.YD(kt)];
+        v=v_center+b.PHID(kt)*[0 -1;1 0]*point;
+        VelPOI(kt,i1:i1+1)=v';
     end
 end
 
 %%% PLotting
 for k = 1:Npointsint
     i1=2*k-1;
-    plot(PosPOI(:,i1),PosPOI(:,i1+1))
+    plot(PosPOI(:,i1),PosPOI(:,i1+1));hold on
+    quiver(PosPOI(:,i1),PosPOI(:,i1+1),VelPOI(:,i1),VelPOI(:,i1+1)); 
 end
