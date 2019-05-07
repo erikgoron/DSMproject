@@ -1,6 +1,6 @@
 function [Phi,Jac,Niv,Gamma]= RevRev(Phi,Jac,Niv,Gamma,Nline,body,k)
 
-global Flag Jnt_RevRev 
+global Flag Jnt_RevRev q00
     i=Jnt_RevRev(k).i;
     j=Jnt_RevRev(k).j;
     i1=Nline;
@@ -8,6 +8,7 @@ global Flag Jnt_RevRev
     if (Flag.Position==1 || Flag.Jacobian==1 || Flag.Gamma==1)
         d = body(j).r-body(j).A*Jnt_RevRev(k).spPj-body(i).r+...
             body(i).A*Jnt_RevRev(k).spPi;
+        d0= 
     end
     
     if (Flag.Position==1)

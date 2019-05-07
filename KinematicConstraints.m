@@ -10,17 +10,19 @@ Niu=zeros(Nconst,1);
 Gamma=zeros(Nconst,1);
 
 Nline=1;
-
+% Revolute joint
 for k=1:Nrevolute
     [Phi,Jac,Niu,Gamma]=JointRevolute(Phi,Jac,Niu,Gamma,Nline,body,k);
     Nline=Nline+2;
 end
 
+% Trans joint
 for k=1:Ntrans
      [Phi,Jac,Niu,Gamma]=Trans(Phi,Jac,Niu,Gamma,Nline,body,k);
      Nline=Nline+2;
 end
 
+% Revolute trans joint
 for k=1:Nrevtra
      [Phi,Jac,Niu,Gamma]=RevTra(Phi,Jac,Niu,Gamma,Nline,body,k);
      Nline=Nline+1;
@@ -38,8 +40,9 @@ for k=1:Ndriver
     Nline=Nline+1;
 end
 
+% Simple constraints
 for k=1:Nsimple
-    [Phi,Jac,Niu,Gamma]=Simplecons(Phi,Jac,Niu,Gamma,Nline,body,k,time);
+    [Phi,Jac,Niu,Gamma]=Simplecons(Phi,Jac,Niu,Gamma,Nline,body,k);
     Nline=Nline+1;
 end 
 
