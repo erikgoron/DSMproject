@@ -4,7 +4,7 @@ global q  Jac tstart tstep tend time qd qdd q0 q00 body0 Flag
 %comment to suppress warning about "variable is changing size every
 %iteration
 %#ok<*SAGROW>
-%    Filename='rameurrevrev.rtf';
+   Filename='rameurrevre.rtf';
 
 
 Readinputdata

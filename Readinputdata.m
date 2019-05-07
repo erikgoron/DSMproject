@@ -16,8 +16,6 @@ line=1;
 Nbody=H(1,1);
 Nrevolute=H(1,2);
 Ntrans=H(1,3);
-
-
 Nrevrev=H(1,4);
 Nrevtra=H(1,5);
 Nground=H(1,6);
@@ -67,9 +65,8 @@ for k=1:Nrevrev
     line=line+1;
     Jnt_RevRev(k).i=H(line,1);
     Jnt_RevRev(k).j=H(line,2);
-    Jnt_RevRev(k).spPi=H(line,3:4);
-    Jnt_RevRev(k).spPj=H(line,5:6);
-    Jnt_RevRev(k).d0=
+    Jnt_RevRev(k).spPi=H(line,3:4)';
+    Jnt_RevRev(k).spPj=H(line,5:6)';
 end
 % RevTra joints
 for k=1:Nrevtra
