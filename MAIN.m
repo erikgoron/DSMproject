@@ -5,7 +5,7 @@ global q  Jac tstart tstep tend time qd qdd q0 q00 body0 Flag
 %iteration
 %#ok<*SAGROW>
 
-%Filename='rameurrevrev.rtf';
+Filename='rameurrevtrans.rtf';
 
 Readinputdata
 
@@ -13,6 +13,7 @@ q00=q0;
 Flag.Position = 0;
 Flag.Jacobian = 0;
 Flag.Niu=0;
+
 Flag.Gamma=0;
 [body0]=Preprocessdata(q0,qd);
 
