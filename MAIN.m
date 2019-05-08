@@ -38,6 +38,6 @@ q0=q+ 0.9*(qd*tstep+ qdd*tstep.^2/2);
 end 
 
 
-Animate2
+Animate
 GetPointsOfInterest
 MeritFunction
