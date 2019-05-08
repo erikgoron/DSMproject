@@ -9,7 +9,7 @@ Flag.Gamma=0;
 
 body = Preprocessdata(q,false); 
 
-[Phi,~,~,~] = KinematicConstraints(body,time);
+[Phi,~,~,~] = KinematicConstraints(body,time)
 
 Flag.Position = 0;
 Flag.Jacobian = 1;
