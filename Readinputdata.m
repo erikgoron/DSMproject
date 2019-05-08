@@ -96,8 +96,8 @@ end
 % RevTra joints
 for k=1:Nrevtra
     line=line+1;
-    Jnt_RevTra(k).i=H(line,1);
-    Jnt_RevTra(k).j=H(line,2);
+    Jnt_RevTra(k).j=H(line,1);
+    Jnt_RevTra(k).i=H(line,2);
     Jnt_RevTra(k).spPj=H(line,5:6)';
     Jnt_RevTra(k).spQj=H(line,3:4)';
     Jnt_RevTra(k).spPi=H(line,7:8)';
@@ -130,7 +130,7 @@ for k=1:Ndriver
     Driver(k).acc=H(line,5);%acceleration
 end
 
-% Points of interest
+% Points of interest 
 for k=1:Npointsint
     line=line+1;
     Points_int(k).i=H(line,1);
