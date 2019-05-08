@@ -4,12 +4,7 @@ global q  Jac tstart tstep tend time qd qdd q0 q00 body0 Flag
 %comment to suppress warning about "variable is changing size every
 %iteration
 %#ok<*SAGROW>
-
-
-
 %Filename='rameurrevtrans.rtf';
-
-
 
 Readinputdata
 
@@ -44,7 +39,7 @@ Accelerations(:,k) = qdd;
 %... Estimation of positions for next time step
 q0=q+ 0.9*(qd*tstep+ qdd*tstep.^2/2);
 end 
-
-
-Animate
-GetPointsOfInterest
+% 
+% 
+% Animate
+% GetPointsOfInterest
