@@ -69,11 +69,15 @@ end
 lines=[];
 %a color for each body
 color=rand(Nbody,3)*0.0;
+if size(ground)~=[0,0]
 for g=ground(:,1)'
     color(g,:)=[1 0 0];
 end
+end
+if size(drivers)~=[0,0]
 for d=drivers(:,1)'
     color(d,:)=[0 1 0];
+end
 end
 %initialize the xlim and ylim values
 maxplot=[0 0];

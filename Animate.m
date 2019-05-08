@@ -8,7 +8,9 @@ frameByFrame=false;
 %animation speed, default = 1= realtime
 frameDelay=0.1; %or manually set tstep after reading input data
 %stop animation anytime with Ctrl+C
-skipmod=1; %show only every n frame
+skipmod=4; %show only every n frame
+
+doGif=true;
 
 
 %%%%%%%%%% ....... COLLECT THE POINTS that we wanna draw for each body
@@ -25,6 +27,16 @@ for k = 1:Nrevolute
     spPi=Jnt_revolute(k).spi;
     spPj=Jnt_revolute(k).spj;
     bodyPoints{i}=[bodyPoints{i} spPi];
+    bodyPoints{j}=[bodyPoints{j} spPj];
+    
+end
+for k = 1:Nrevtra
+    i=Jnt_RevTra(k).i;
+    j=Jnt_RevTra(k).j;
+    spPi=Jnt_RevTra(k).spPj;
+    spQj=Jnt_RevTra(k).spQj;
+    spPj=Jnt_RevTra(k).spPi;
+    bodyPoints{i}=[bodyPoints{i} spPi spQj];
     bodyPoints{j}=[bodyPoints{j} spPj];
     
 end
@@ -60,8 +72,8 @@ end
 %as lines between center and joints/POIs
 lines=[];
 %a color for each body
-color=rand(Nbody,3);
-color=color*0;
+color=rand(Nbody,3)*0.85*0;
+%color=color*0;
 
 %initialize the xlim and ylim values
 maxplot=[0 0];
@@ -77,13 +89,13 @@ A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 fig1=figure;
 for doPlot=[0,ones(1,repeatAnimation)]
     for kt=1:length(t)
-        if mod(kt,skipmod)~=0&&kt~=length(t)
+        if mod(kt,skipmod)~=1&&kt~=length(t)
             continue;
         end
         for i=1:Nbody
-            if i==Ground(1).i
+            %if i==Ground(1).i
                 %continue;
-            end
+            %end
             
             b=body{i};
             center=[b.X(kt);b.Y(kt)];
@@ -119,8 +131,24 @@ for doPlot=[0,ones(1,repeatAnimation)]
             end
         end
         if doPlot
+            if doGif
+                drawnow
+                filename='anim.gif';
+                % Capture the plot as an image
+                frame = getframe(fig1);
+                im = frame2im(frame);
+                [imind,cm] = rgb2ind(im,256);
+                % Write to the GIF File
+                if kt == 1
+                    imwrite(imind,cm,filename,'gif', 'Loopcount',inf,'DelayTime',0.03);
+                else
+                    imwrite(imind,cm,filename,'gif','WriteMode','append');
+                end
+            end
+            
             %to pause at every timestep until user
             %presses enter
+            
             if frameByFrame
                 input('press enter','s');
             else

@@ -1,5 +1,6 @@
 PositionsT=Positions';
 VelocitiesT=Velocities';
+AccelerationsT=Accelerations';
 % turn off a warning
 warning('off','MATLAB:table:RowsAddedExistingVars');
 for i=1:Nbody
@@ -8,12 +9,13 @@ for i=1:Nbody
     %using table because i can dynamically assign variables
     i2=i*3; % 3 6 9
     i1=i2-2; % 1 4 7
-    body{i}.Variables=[PositionsT(:,i1:i2),VelocitiesT(:,i1:i2)];
-    body{i}.Properties.VariableNames={'X','Y','PHI','XD','YD','PHID'};
+    body{i}.Variables=[PositionsT(:,i1:i2),VelocitiesT(:,i1:i2),AccelerationsT(:,i1:i2)];
+    body{i}.Properties.VariableNames={'X','Y','PHI','XD','YD','PHID','XDD','YDD','PHIDD'};
 end
-
+A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 PosPOI=zeros(length(t),Npointsint*2);
 VelPOI=zeros(length(t),Npointsint*2);
+AccPOI=zeros(length(t),Npointsint*2);
 for kt=1:length(t)
     
     for k = 1:Npointsint
@@ -29,6 +31,10 @@ for kt=1:length(t)
         v_center=[b.XD(kt);b.YD(kt)];
         v=v_center+b.PHID(kt)*[0 -1;1 0]*point;
         VelPOI(kt,i1:i1+1)=v';
+        
+        a_center=[b.XDD(kt);b.YDD(kt)];
+        a=a_center+b.PHID(kt)^2*point-b.PHIDD(kt)*[0 -1;1 0]*point;
+        AccPOI(kt,i1:i1+1)=a;
     end
 end
 
@@ -36,5 +42,5 @@ end
 for k = 1:Npointsint
     i1=2*k-1;
     plot(PosPOI(:,i1),PosPOI(:,i1+1));hold on
-    quiver(PosPOI(:,i1),PosPOI(:,i1+1),VelPOI(:,i1),VelPOI(:,i1+1)); 
+    quiver(PosPOI(:,i1),PosPOI(:,i1+1),AccPOI(:,i1),AccPOI(:,i1+1)); 
 end

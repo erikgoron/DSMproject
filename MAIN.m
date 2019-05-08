@@ -5,8 +5,10 @@ global q  Jac tstart tstep tend time qd qdd q0 q00 body0 Flag
 %iteration
 %#ok<*SAGROW>
 
+
 %Filename='rameurrevtrans.rtf';
-Filename='strandbeest_v3.rtf';
+Filename='strandbeest_v4.rtf';
+
 
 Readinputdata
 
@@ -42,6 +44,6 @@ Accelerations(:,k) = qdd;
 q0=q+ 0.9*(qd*tstep+ qdd*tstep.^2/2);
 end 
 
-
-Animate
+Animate2
 GetPointsOfInterest
+MeritFunction
