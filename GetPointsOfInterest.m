@@ -33,14 +33,32 @@ for kt=1:length(t)
         VelPOI(kt,i1:i1+1)=v';
         
         a_center=[b.XDD(kt);b.YDD(kt)];
-        a=a_center+b.PHID(kt)^2*point-b.PHIDD(kt)*[0 -1;1 0]*point;
+        a=a_center-b.PHID(kt)^2*point+ b.PHIDD(kt)*[0 -1;1 0]*point;
         AccPOI(kt,i1:i1+1)=a;
     end
 end
 
 %%% PLotting
-for k = 1:Npointsint
-    i1=2*k-1;
-    plot(PosPOI(:,i1),PosPOI(:,i1+1));hold on
-    quiver(PosPOI(:,i1),PosPOI(:,i1+1),AccPOI(:,i1),AccPOI(:,i1+1)); 
+% for k = 1:Npointsint
+%     i1=2*k-1;
+%     plot(PosPOI(:,i1),PosPOI(:,i1+1));hold on
+%     quiver(PosPOI(:,i1),PosPOI(:,i1+1),AccPOI(:,i1),AccPOI(:,i1+1),1);
+% end
+POI={PosPOI,VelPOI,AccPOI};
+close all
+for k=1:3%p,v,a
+    figure(k)
+    for i1=1:2 %coord
+        plot(t,POI{k}(:,i1)); hold on
+    end
+    pva={'Position','Velocity','Acceleration'};
+    pvau={'Pos [m]','Vel [m/s]','Acc [m/s^2]'};
+    crd={'X','Y'};
+    legend(crd)
+    title(['Foot ', pva{k}])
+    xlabel('time [s]');
+    ylabel(pvau{k});
+    
+    
 end
+
