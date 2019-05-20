@@ -1,7 +1,7 @@
 function [yd] = FuncEval(t,y)
 
 %   Accessing memory
-global Body Nbodies Gravity Spr_Damper
+global Body NBodies Gravity Spr_Damper
 global Nsprdampers Force_applied Napplforces
 
 %   Updating local information
