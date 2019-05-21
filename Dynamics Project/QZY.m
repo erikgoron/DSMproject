@@ -1,4 +1,4 @@
-function [Yphi] = QZY(Body, NBodies)
+function [y0] = q2y(Body, NBodies)
 
 global Ncoord
 %   Form the vector with initial conditions

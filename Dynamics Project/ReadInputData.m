@@ -24,7 +24,7 @@
 % Body i,Body j,Spring const, undeformed spring length, Damp. const, Actuator force, XI_P_i, ETA_P_i, XI_P_j, ETA_P_j,
 % 14.Starting_time, Final_time, Report_time_increment
 % 15.Gravity data:
-% Gravity force, Gravity direction
+% Gravity force, Gravity direction: Xgr,Ygr
 % 16.Integration data:
 % alpha, beta
 
@@ -32,7 +32,7 @@
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint Napplforces Nsprdampers
 
 global Jnt_revolute tend tstart tstep q0 qd0 Jnt_trans Ground Points_int Jnt_RevRev Jnt_RevTra
-global Ncoord Nconst NRparameters Driver Simple Force_applied Spr_Damper Gravity alpha beta 
+global Ncoord Nconst NRparameters Driver body Simple Force_applied Spr_Damper Gravity alpha beta 
 NRparameters.tolerance = 0.000001;
 NRparameters.MaxIteration = 20;
 
@@ -69,6 +69,12 @@ q0=[];
 q0mat=[];
 for i=1:Nbody
     line=line+1;
+    body(i).r=H(line,1:2);
+    body(i).theta=H(line,3)
+    body(i).rd=H(line,4:5);
+    body(i).thetad=H(line,6);
+    body(i).mass=H(line,7);
+    body(i).J=H(line,8);
     q0=[q0;H(line,1:3)'];
     qd0=[qd0;H(line,4:6)']
     q0mat=[q0mat;H(line,1:3)];
@@ -155,8 +161,8 @@ end
 for k=1:Napllforces
     line = line+1;
     Force_applied(k).i=H(line,1);
-    Force_applied(k).spPi=H(line,2:3);
-    Force_applied(k).f=H(line,4:5);
+    Force_applied(k).spPi=H(line,2:3)';
+    Force_applied(k).f=H(line,4:5)';
     Force_applied(k).mu=H(line,6);
 end
 
@@ -169,8 +175,8 @@ for k=1:Nsprdampers
     Spr_Damper(k).l0=H(line,4);
     Spr_Damper(k).c=H(line,5);
     Spr_Damper(k).a=H(line,6);
-    Spr_Damper(k).spPi=H(line,7:8);
-    Spr_Damper(k).spPj=H(line,9:10);
+    Spr_Damper(k).spPi=H(line,7:8)';
+    Spr_Damper(k).spPj=H(line,9:10)';
 end
 
 line=line+1;
@@ -181,8 +187,8 @@ tend=H(line,2);
 
 %   Gravity acceleration
 line=line+1;
-Gravity.force=H(line,1);
-Gravity.direction=H(line,2);
+Gravity.force=H(line,1); %9.81
+Gravity.direction=H(line,2:3)'; %[0 -1]
 
 %   Integration information
 line=line+1;
