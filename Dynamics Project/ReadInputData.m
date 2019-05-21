@@ -33,9 +33,6 @@ global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsin
 
 global Jnt_revolute tend tstart tstep q0 qd0 Jnt_trans Ground Points_int Jnt_RevRev Jnt_RevTra
 global Ncoord Nconst NRparameters Driver body Simple Force_applied Spr_Damper Gravity alpha beta 
-NRparameters.tolerance = 0.000001;
-NRparameters.MaxIteration = 20;
-
 
 if not(exist('Filename','var'))
     Filename= uigetfile('*.rtf','Select Model');

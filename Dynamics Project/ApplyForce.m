@@ -1,8 +1,8 @@
-function [g] = ApplyForce(g,f,spPi,Body,i)
+function [g] = ApplyForce(g,f,spPi,body,i)
 
 % Transport moment
 R = [0 -1;1 0];
-n = f'*R*(Body(i).A*spPi);
+n = f'*R*(body(i).A*spPi);
 
 % Add to vector force
 i1 = 3*i-2;

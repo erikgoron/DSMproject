@@ -2,7 +2,7 @@ function [yd] = FuncEval(t,y)
 
 %   Accessing memory
 global body Nbody Gravity Spr_Damper Flag
-global Nsprdampers Force_applied Napplforces
+global Nsprdampers Force_applied Napplforces Ncoord
 
 %   Updating local information
 [body] = y2Body(y,body,Nbody);
@@ -23,7 +23,7 @@ Flag.Acceleration=1;
 
 %   Leading matrix and vector of equations of motion
 Mass=[M, Jac'; Jac, zeros(Nconstraints,Nconstraints)];
-Force=[g;Gamma]
+Force=[g;Gamma];
 
 %   Solving system of equations to get accelerations and Lagrange multipliers
 b=Mass\Force;
