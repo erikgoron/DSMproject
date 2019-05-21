@@ -25,8 +25,7 @@
 % 14.Starting_time, Final_time, Report_time_increment
 % 15.Gravity data:
 % Gravity force, Gravity direction
-% 16.Integration data:
-% alpha, beta
+
 
 
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint Napplforces Nsprdampers
