@@ -1,4 +1,4 @@
-function [] = ReadInputData();
+function [] = ReadInputData()
 
 %   Accessing memory
 global
