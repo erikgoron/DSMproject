@@ -39,6 +39,6 @@ q0=q+ 0.9*(qd*tstep+ qdd*tstep.^2/2);
 end 
 
 
-Animate
-GetPointsOfInterest
-MeritFunction
+% Animate
+% GetPointsOfInterest
+% MeritFunction
