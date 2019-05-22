@@ -1,5 +1,5 @@
-function [g] = MakeForceVector
-global body Nbody Spr_Damper Nsprdampers Ncoord  Force_applied Napplforces
+function [g] = MakeForceVector(body)
+global Nbody Spr_Damper Nsprdampers Ncoord  Force_applied Napplforces
 global  Gravity 
 [g] = ForceGravity(body, Nbody, Gravity, Ncoord);
 % Spring-damper-actuator forces

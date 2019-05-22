@@ -1,5 +1,5 @@
 function [body] = y2Body(y,body,NBody);
-
+global Ncoord 
 %   Transfer the positions to local variables
 for i=1:NBody;
     i1=3*i-2;

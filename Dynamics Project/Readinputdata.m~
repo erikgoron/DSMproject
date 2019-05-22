@@ -32,7 +32,7 @@
 global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint Napplforces Nsprdampers
 
 global Jnt_revolute tend tstart tstep q0 qd0 Jnt_trans Ground Points_int Jnt_RevRev Jnt_RevTra
-global Ncoord Nconst tspan Driver body Simple Force_applied Spr_Damper Gravity alpha beta 
+global Ncoord Nconst NRparameters Driver body Simple Force_applied Spr_Damper Gravity alpha beta 
 
 if not(exist('Filename','var'))
     Filename= uigetfile('*.rtf','Select Model');
@@ -40,9 +40,10 @@ end
 
 %read data from input file
 H=dlmread(Filename);
+
 %check if the number of lines is correct
-% assert(sum(H(1,:))+4==size(H,1),['number of lines of inputfile is',...
-%       'not correct, or there is a mistake in the first line']);
+assert(sum(H(1,:))+2==size(H,1),['number of lines of inputfile is',...
+      'not correct, or there is a mistake in the first line']);
 % store in vars
 line=1;
 Nbody=H(1,1);
@@ -65,14 +66,14 @@ q0=[];
 q0mat=[];
 for i=1:Nbody
     line=line+1;
-    body(i).r=H(line,1:2)';
-    body(i).theta=H(line,3);
-    body(i).rd=H(line,4:5)';
+    body(i).r=H(line,1:2);
+    body(i).theta=H(line,3)
+    body(i).rd=H(line,4:5);
     body(i).thetad=H(line,6);
     body(i).mass=H(line,7);
     body(i).J=H(line,8);
     q0=[q0;H(line,1:3)'];
-    qd0=[qd0;H(line,4:6)'];
+    qd0=[qd0;H(line,4:6)']
     q0mat=[q0mat;H(line,1:3)];
 end
 
@@ -164,7 +165,7 @@ end
 
 %   Spring and Dampers
 for k=1:Nsprdampers 
-    line=line+1;
+    line=line+1:
     Spr_Damper(k).i=H(line,1);
     Spr_Damper(k).j=H(line,2);
     Spr_Damper(k).k=H(line,3);
@@ -179,7 +180,6 @@ line=line+1;
 tstart=H(line,1);
 tstep=H(line,3);
 tend=H(line,2);
-tspan=tstart:tstep:tend;
 %tseries=H(line,1):H(line,3):H(line,2);
 
 %   Gravity acceleration
@@ -191,4 +191,5 @@ Gravity.direction=H(line,2:3)'; %[0 -1]
 line=line+1;
 alpha=H(line,1);
 beta=H(line,2);
+end
 
