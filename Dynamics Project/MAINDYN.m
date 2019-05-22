@@ -1,5 +1,5 @@
 clear all
-global tspan body Nbody Ncoord bb
+global tspan body Nbody Ncoord 
 
 Filename='4bardyn.rtf';
 
@@ -16,11 +16,5 @@ for k=1:size(tspan,2)
 end
 
 Animate;
-%Post process data and report
-figure;
-axis equal
-hold on
-plot(y(:,4),y(:,5));
-plot(y(:,7),y(:,8));
-plot(y(:,10),y(:,11));
-hold off
+
+
