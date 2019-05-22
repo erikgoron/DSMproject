@@ -1,5 +1,5 @@
 clear all
-global tspan body Nbody Ncoord bb
+global tspan body Nbody dist
 
 Filename='4bardyn.rtf';
 
@@ -10,12 +10,8 @@ y0=q2y(body,Nbody);
 
 [t,y]=ode45(@FuncEval,tspan,y0);
 
-for k=1:size(tspan,2)
-    Positions(:,k)=y(k,1:Ncoord);
-    Velocities(:,k)=y(k,Ncoord+1:2*Ncoord);
-end
-
-Animate;
+for i=1:Nbody
+    Position(:,)
 %Post process data and report
 figure;
 axis equal
@@ -23,4 +19,9 @@ hold on
 plot(y(:,4),y(:,5));
 plot(y(:,7),y(:,8));
 plot(y(:,10),y(:,11));
+hold off
+figure 
+hold on
+
+plot(tspan,dist);
 hold off

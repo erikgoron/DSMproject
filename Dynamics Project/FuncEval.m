@@ -2,7 +2,7 @@ function [yd] = FuncEval(t,y)
 
 %   Accessing memory
 global body Nbody  Flag alpha beta 
-global  Ncoord Nconst 
+global  Ncoord Nconst ld Spr_Damper bb
 
 %   Updating local information
 [body] = y2Body(y,body,Nbody);
@@ -18,11 +18,11 @@ Flag.Position=1;
 Flag.Jacobian=1;
 Flag.Velocity=0;
 Flag.Gamma=1;
-[Phi,Jac,Niu,Gamma]=KinematicConstraints(body,t);
+[~,Jac,~,Gamma]=KinematicConstraints(body,t);
 
 %   Leading matrix and vector of equations of motion
 Mass=[M, Jac'; Jac, zeros(Nconst,Nconst)];
-Force=[g;Gamma+2*alpha*(Jac*y(1:Ncoord)-Niu)+beta^2*Phi];
+Force=[g;Gamma]; % +2*alpha*(Jac*y(1:Ncoord)-Niu)+beta^2*Phi
 
 %   Solving system of equations to get accelerations and Lagrange multipliers
 b=Mass\Force;
