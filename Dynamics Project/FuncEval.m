@@ -18,12 +18,11 @@ Flag.Position=1;
 Flag.Jacobian=1;
 Flag.Velocity=0;
 Flag.Gamma=1;
-[~,Jac,~,Gamma]=KinematicConstraints(body,t);
+[Phi,Jac,Niu,Gamma]=KinematicConstraints(body,t);
 
 %   Leading matrix and vector of equations of motion
 Mass=[M, Jac'; Jac, zeros(Nconst,Nconst)];
-Force=[g;Gamma]; % +2*alpha*(Jac*y(1:Ncoord)-Niu)+beta^2*Phi
-
+Force=[g;Gamma-2*alpha*(Jac*y(Ncoord+1:2*Ncoord)-Niu)-beta^2*Phi];  
 %   Solving system of equations to get accelerations and Lagrange multipliers
 b=Mass\Force;
 
