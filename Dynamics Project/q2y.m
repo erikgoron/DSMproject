@@ -1,5 +1,6 @@
 function [y0] = q2y(body, NBody)
 
+
 global Ncoord
 %   Form the vector with initial conditions
 for i=1:NBody
