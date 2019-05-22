@@ -1,15 +1,22 @@
-%clear all
+clear all
 addpath nogit
 %load('joints_bodies');
 load('jb_v3.2.mat')
+load('iposvel_v3.2.mat')
 %load('bodies_L_at_pi_2_rad.mat');
 % load('bodies_R_at_pi_2_rad.mat');
 
 %model Parameters
-%jointPos=-6.11; % -5.11
-leg2length=47.08; %47.08;
-bodies.Size(2)=leg2length;
-bodies.Size(2+12)=leg2length;
+linDens=1; %linear density of the bars
+
+
+jointPos=-5.11; % -5.11
+
+
+
+% leg2length=47.08; %47.08;
+% bodies.Size(2)=leg2length;
+% bodies.Size(2+12)=leg2length;
 
 Nbody=size(bodies,1);
 Nrev=size(joints,1);
@@ -19,7 +26,6 @@ jmat=zeros(Nrev,6);
 for k=1:Nrev
     b1=joints.b1(k);
     b2=joints.b2(k);
-    
     sz=bodies.Size(b1);
     loc=joints.b1_jloc(k);
     if loc==0 %left \xi negative
@@ -55,27 +61,48 @@ end
 %bodies.Phi0=round(bodies.Phi0*2*pi/180,3);
 
 
-bvar=bodies.Variables;
-bodiesmat=bvar(:,2:4);
+% bvar=bodies.Variables;
+% bodiesmat=bvar(:,2:4);
 
-Nground=0;
-Ndriver=7;
-Npointsint=2;
-Nrevrev=0;
-Nsimple=0;
-l1=[Nbody,Nrev,0,Nrevrev,0,Nground,Nsimple,Ndriver,Npointsint];
-ground= [];%[12,bodies.X0(12),0,0;];%[12,0,0,pi];
-drivers=[11,3,bodies.Phi0(11),0.17,0;
-    12,1,bodies.X0(12),-2.9,0;
-    12,2,0,0,0;
-    12,3,0,0,0;
-    24,1,bodies.X0(24),-2.9,0;
-    24,2,0,0,0;
-    24,3,pi,0,0];%10/360*2*pi
+for i=1:Nbody
+    L=bodies.Size(i);
+    m(i)=L*linDens;
+    I(i)=m(i)*L^2/12;
+end
+bodiesmat=[ipos,m',I'];
+
+
+
+% jmat(jmat(:,1)==25,:)=[];
+% jmat(jmat(:,2)==25,:)=[];
+% Nrev=size(jmat,1);
+% bodiesmat=bodiesmat(1:24,:);
+% Nbody=size(bodiesmat,1);
+
+
+ground= [12,bodies.X0(12),0,0;
+    24,bodies.X0(24),0,bodies.Phi0(24);];%[12,bodies.X0(12),0,0;];%[12,0,0,pi];
+drivers=[];%[11,3,bodies.Phi0(11),0.17,0;];%10/360*2*pi
 simple=[];
 POI=[1,-bodies.Size(1)/2,0;...
     13,-bodies.Size(13)/2,0;];
+forces=[];
+springs=[];
 
+gravity=[0,-9.81];
+integra=[1,0]; %alpha, beta
+
+Nground=size(ground,1);
+Ndriver=size(drivers,1);
+Npointsint=size(POI,1);
+Nrevrev=0;
+Nsimple=0;
+Napplforces=size(forces,1);
+Nsprdampers=size(springs,1);
+% 1.NBody, NRevolute, NTranslation, NRev-Rev, NRev-Tra, Nground, NSimple,
+%          Ndriver,NPoints,Nappliedforces,Nspring/damp/actuat 
+l1=[Nbody,Nrev,0,Nrevrev,0,Nground,Nsimple,...
+    Ndriver,Npointsint,Napplforces,Nsprdampers];
 timeseries=[0,36,1];
 
 
@@ -87,20 +114,24 @@ csvwrite('grounds.csv',ground);
 csvwrite('drivers.csv',drivers);
 csvwrite('simple.csv',simple);
 csvwrite('POI.csv',POI);
+csvwrite('forces.csv',forces);
+csvwrite('springs.csv',springs);
 csvwrite('timeseries.csv',timeseries);
+csvwrite('gravity.csv',gravity);
+csvwrite('integra.csv',integra);
 tempfiles={'l1.csv','body_input.csv','joints_input.csv',...
-    'grounds.csv','drivers.csv','simple.csv','POI.csv','timeseries.csv'};
-Filename='strandbeest_v3.3_bad_design.rtf';
+    'grounds.csv','drivers.csv','simple.csv','POI.csv',...
+    'forces.csv','springs.csv','timeseries.csv','gravity.csv','integra.csv'};
+Filename='strandbeestDAP_v3.2.rtf';
 
 system(['copy /b ',strjoin(tempfiles,'+'),' ',Filename]);
 system(['del ',strjoin(tempfiles,' ')]);
 
 
-
-Readinputdata
+ReadInputDAP
 %ground=12;
 %Ground.i=12;
-%PlotInitialPos2
+PlotInitialPos2
 
 
     

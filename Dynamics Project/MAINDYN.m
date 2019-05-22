@@ -1,9 +1,9 @@
 clear all
 global tspan body Nbody Ncoord 
 
-Filename='4bardyn.rtf';
+% Filename='4bardyn.rtf';
 
-Readinputdata
+ReadInputDAP
 
 % Vector with initial conditions y0
 y0=q2y(body,Nbody);
