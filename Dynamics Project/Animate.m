@@ -8,7 +8,7 @@ frameByFrame=false;
 %animation speed, default = 1= realtime
 frameDelay=0.1; %or manually set tstep after reading input data
 %stop animation anytime with Ctrl+C
-skipmod=1; %show only every n frame
+skipmod=10; %show only every n frame
 
 doGif=false;
 
@@ -94,7 +94,7 @@ for doPlot=[0,ones(1,repeatAnimation)]
         end
         for i=1:Nbody
             %if i==Ground(1).i
-                %continue;
+            %continue;
             %end
             
             b=bodys{i};
@@ -106,8 +106,9 @@ for doPlot=[0,ones(1,repeatAnimation)]
                 if doPlot
                     l=plot([center(1) px],...
                         [center(2) py],...
-                        '-o',...
+                        '-',...
                         'Color',color(i,:));
+                    
                     if ~ishandle(fig1)
                         break;
                     end
@@ -130,6 +131,32 @@ for doPlot=[0,ones(1,repeatAnimation)]
                 
             end
         end
+        for k = 1:Nrevolute
+            i=Jnt_revolute(k).i;
+            j=Jnt_revolute(k).j;
+            spPi=Jnt_revolute(k).spi;
+            spPj=Jnt_revolute(k).spj;
+
+
+            
+            b=bodys{j};
+            center=[b.X(kt);b.Y(kt)];
+            points= A(b.PHI(kt))*spPj;
+            
+            p2=center+points;
+            qx(k)=p2(1);
+            qy(k)=p2(2);
+            i1=2*k-1;
+            i2=i1+1;
+            qu(k)=lambda(i1,kt);
+            qv(k)=lambda(i2,kt);
+%             qn(k)=max(norm([qu(k) qv(k)])/1e5,1);
+            
+            
+        end
+%         qvr=quiver(qx,qy,qu,qv);
+%         plot(qx,qy,'.','Color',hsv2rgb([qn
+        lines=[lines, qvr];
         if doPlot
             if doGif
                 drawnow
