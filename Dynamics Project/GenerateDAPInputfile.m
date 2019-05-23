@@ -1,8 +1,8 @@
 clear all
-addpath nogit
+
 %load('joints_bodies');
-load('jb_v3.2.mat')
-load('iposvel_v3.2.mat')
+load('jb_v4.2.8.mat')
+% load('iposvel_v3.2.mat')
 %load('bodies_L_at_pi_2_rad.mat');
 % load('bodies_R_at_pi_2_rad.mat');
 
@@ -20,6 +20,17 @@ jointPos=-5.11; % -5.11
 
 Nbody=size(bodies,1);
 Nrev=size(joints,1);
+% oldbodies=1:Nbody;
+% delbodies=[12,24,37,49];
+% oldbodies(delbodies)=[];
+% newbodies(oldbodies)=1:46;
+% newbodies(delbodies)=51;
+% bvar=bodies.Variables;
+% bodies(delbodies,:)=[];
+% newbodies=1:48;
+% newbodies(48)=47;
+% joints.b1=newbodies(joints.b1)';
+% joints.b2=newbodies(joints.b2)';
 
 
 jmat=zeros(Nrev,6);
@@ -41,12 +52,16 @@ for k=1:Nrev
     
     sz=bodies.Size(b2);
     loc=joints.b2_jloc(k);
+    
     if loc==0 %left \xi negative
         b2_loc=-sz/2;
     elseif loc==1 %right, \xi positive
         b2_loc=sz/2;
-    elseif loc==3
-        b2_loc=3/2*sz;
+    elseif loc>1
+        assert(b2==47,'oops wrong b2_jloc');
+        a=[-20.91-95,-95,-85,-85+20.91];
+        loc48(3:10)=[a,-a];
+        b2_loc=loc48(loc);
     else
         error('joint2');
     end
@@ -69,9 +84,10 @@ for i=1:Nbody
     m(i)=L*linDens;
     I(i)=m(i)*L^2/12;
 end
-bodiesmat=[ipos,m',I'];
-
-bodiesmat(1:Nbody,4:6)=0;
+ bodiesmat=[ipos,m',I'];
+% 
+% bodiesmat(1:Nbody,4:6)=0;
+% bodiesmat(:,7:8)=[m',I'];
 
 % jmat(jmat(:,1)==25,:)=[];
 % jmat(jmat(:,2)==25,:)=[];
@@ -88,11 +104,13 @@ POI=[1,-bodies.Size(1)/2,0;...
     13,-bodies.Size(13)/2,0;];
 forces=[];
 springs=[];
-contactforce=[1,-bodies.Size(1)/2,-60,100,50
-            13,-bodies.Size(13)/2,-60,100,50];
-
+contactforce=[1,-bodies.Size(1)/2,0,-60,100,50;
+            13,-bodies.Size(13)/2,0,-60,100,50;
+            25,-bodies.Size(13)/2,0,-60,100,50;
+            36,-bodies.Size(13)/2,0,-60,100,50];
+contactforce=[];
 gravity=[9.81,0,-1];
-integra=[1,0]; %alpha, beta
+integra=[5,5]; %alpha, beta
 
 Nground=size(ground,1);
 Ndriver=size(drivers,1);
@@ -126,16 +144,17 @@ csvwrite('integra.csv',integra);
 tempfiles={'l1.csv','body_input.csv','joints_input.csv',...
     'grounds.csv','drivers.csv','simple.csv','POI.csv',...
     'forces.csv','springs.csv','contactforce.csv','timeseries.csv','gravity.csv','integra.csv'};
-Filename='strandbeestDAP_v3.2.rtf';
+Filename='strandbeestDAP_v4.2.rtf';
 
 system(['copy /b ',strjoin(tempfiles,'+'),' ',Filename]);
 system(['del ',strjoin(tempfiles,' ')]);
 
 % 
 ReadInputDAP
-ground=12;
-Ground.i=12;
-PlotInitialPos2
+% ground=12;
+% Ground.i=12;
+% PlotInitialPos2
+% PlotNo
 
 
     

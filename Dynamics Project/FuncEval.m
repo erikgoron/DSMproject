@@ -18,6 +18,7 @@ Flag.Position=1;
 Flag.Jacobian=1;
 Flag.Velocity=0;
 Flag.Gamma=1;
+Flag.Niu=0;
 [Phi,Jac,Niu,Gamma]=KinematicConstraints(body,t);
 
 %   Leading matrix and vector of equations of motion
