@@ -1,8 +1,6 @@
 function [g]= ForceContact(g,body,Contactforce,Ncontactforces)
 
 
-
-
 v0=0.01;
 v0ff=0.01;
 n=1.3;
