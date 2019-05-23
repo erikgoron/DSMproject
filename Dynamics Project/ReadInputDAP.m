@@ -56,6 +56,7 @@ Ndriver=H(1,8);
 Npointsint=H(1,9);
 Napplforces=H(1,10);
 Nsprdampers=H(1,11);
+Ncontactforces=H(1,12);
 Ncoord=3*Nbody;
 Nconst=2*Nrevolute+2*Ntrans+Nrevrev+Nrevtra+...
     3*Nground+Nsimple+Ndriver;
@@ -178,11 +179,10 @@ end
 for k=1:Ncontactforces
     line=line+1;
     Contactforce(k).i=H(line,1);
-    Contactforce(k).ct=H(line,2);
     Contactforce(k).spi=H(line,3:4)';
-    Contactforce(k).spj=H(line,5:6)';
-    Contactforce(k).k=H(lines,7);
-    Contactforce(k).c=H(lines,8);
+    Contactforce(k).y=H(line,5)';
+    Contactforce(k).k=H(lines,6);
+    Contactforce(k).c=H(lines,7);
 end
     
 line=line+1;
