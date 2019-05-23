@@ -9,7 +9,7 @@ n=1.3;
 ce=0.01;
 
 
-for k=1:Ncontactforce
+for k=1:Ncontactforces
 i=Contactforce(k).i;
 
 
