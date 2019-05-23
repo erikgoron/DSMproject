@@ -15,8 +15,9 @@ y0=q2y(body,Nbody);
 for k=1:size(tspan,2)
     Positions(:,k)=y(k,1:Ncoord);
     Velocities(:,k)=y(k,Ncoord+1:2*Ncoord);
-    lambda(:,k)=getLambdas(tspan(k),y(k,:)');
+    [lambda(:,k),Accelerations(:,k)]=getLambdas(tspan(k),y(k,:)');
 end
+
 
 Njoints = Nrevolute+Nrevrev+Nrevtra+Ntrans;
 for i=1:2:2*Njoints
@@ -27,6 +28,7 @@ for i=1:2:2*Njoints
 end
 
 hold off
+
 
 
 

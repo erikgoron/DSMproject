@@ -1,4 +1,4 @@
-function [lambda] = getLambdas(t,y)
+function [lambda,acceleration] = getLambdas(t,y)
 
 %   Accessing memory
 global body Nbody  Flag alpha beta 
@@ -25,7 +25,7 @@ Mass=[M, Jac'; Jac, zeros(Nconst,Nconst)];
 Force=[g;Gamma-2*alpha*(Jac*y(Ncoord+1:2*Ncoord)-Niu)-beta^2*Phi];  
 %   Solving system of equations to get accelerations and Lagrange multipliers
 b=Mass\Force;
-
+acceleration=b(1:Ncoord);
 lambda=b(Ncoord+1:Ncoord+Nconst);
 
 %   Forming the auxiliary vector yd
