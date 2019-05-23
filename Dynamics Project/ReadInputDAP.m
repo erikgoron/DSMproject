@@ -19,12 +19,12 @@
 % 10.For each Point-of-Interest to be reported:
 % Body_i, XI_P_i, ETA_P_i
 % 12.For each applied force :
-% Body_i, XI_P_i, ETA_P_i, y, coeff stiff, coeff frict
+% 
 % Body i, XI_P_i, ETA_P_i,Force FX,Force FY, Moment M.
 % 13.For each Spring/Damp/Actuat :
 % Body i,Body j,Spring const, undeformed spring length, Damp. const, Actuator force, XI_P_i, ETA_P_i, XI_P_j, ETA_P_j,
 % 14.For each contact force : 
-% 
+% Body_i, XI_P_i, ETA_P_i, y, coeff stiff, coeff frict
 % 15.Starting_time, Final_time, Report_time_increment
 % 16.Gravity data:
 % Gravity force, Gravity direction: Xgr,Ygr

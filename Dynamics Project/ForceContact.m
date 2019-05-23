@@ -9,7 +9,7 @@ n=1.3;
 ce=0.01;
 
 
-for k=1:Ncontactforce
+for k=1:Ncontactforces
 i=Contactforce(k).i;
 
 
@@ -21,9 +21,9 @@ c=Contactforce(k).c;
 cPi = body(i).r+body(i).A*spPi;
 cPid= body(i).rd+ body(i).B*spPi*body(i).thetad;
 
-dy=groundY-cPi(2);
-ddy=-cPid(2);
-ddx=cPid(1);
+dy=groundY-cPi(2)
+ddy=-cPid(2)
+ddx=cPid(1)
 
 if dy>0
     if ddy<=-v0
@@ -37,9 +37,9 @@ if dy>0
     
    
     c_smooth=1-exp(-3*norm(ddx)/v0ff);
-    ffri=-c_smooth*Contactforce(k).c*fn*sign(ddx);
+%     ffri=-c_smooth*Contactforce(k).c*fn*sign(ddx);
     fn=kc*dy+c*ddy;
-    fn=max(fn,0);
+%     fn=max(fn,0);
     ffri=-c*ddx;
     f=[ffri;fn];
     
