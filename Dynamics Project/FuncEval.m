@@ -2,7 +2,7 @@ function [yd] = FuncEval(t,y)
 
 %   Accessing memory
 global body Nbody  Flag alpha beta 
-global  Ncoord Nconst ld Spr_Damper bb
+global  Ncoord Nconst 
 
 %   Updating local information
 [body] = y2Body(y,body,Nbody);
