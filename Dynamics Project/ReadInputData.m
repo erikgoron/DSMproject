@@ -27,7 +27,7 @@ Nsprdampers=H(1,11);
 for i=1:Nbody
     line=line+1;
     body(i).r=H(line,1:2);
-    body(i).theta=H(line,3)
+    body(i).theta=H(line,3);
     body(i).rd=H(line,4:5);
     body(i).thetad=H(line,6);
     body(i).mass=H(line,7);
@@ -69,7 +69,7 @@ end
 
 %   Spring and Dampers
 for k=1:Nsprdampers 
-    line=line+1:
+    line=line+1;
     Spr_Damper(k).i=H(line,1);
     Spr_Damper(k).j=H(line,2);
     Spr_Damper(k).k=H(line,3);
