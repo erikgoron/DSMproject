@@ -18,6 +18,17 @@ for k=1:size(tspan,2)
     lambda(:,k)=getLambdas(tspan(k),y(k,:)');
 end
 
+Njoints = Nrevolute+Nrevrev+Nrevtra+Ntrans;
+for i=1:2:2*Njoints
+    j = (i+1)/2;
+    normlambda(j,:) = sqrt(lambda(i,:).^2+lambda(i+1,:).^2);
+    plot(tspan, normlambda(j,:));
+    hold on 
+end
+
+hold off
+
+
 
 
 Animate;

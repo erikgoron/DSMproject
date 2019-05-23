@@ -15,17 +15,20 @@
 % 8.For each Simple Constraint:
 % Bodyi, Coordinate (use 1 for X, or 2 for Y, or 3 for PHI) 
 % 9.For each Driver Constraint:
-% BodyNumber, Driven_Coordinate (use 1 for X, or 2 for Y, or 3 for PHI), Position_init, Veloc_init, Accel_init
+% BodyNumber, Driven_Coordinate (use 1 for X, or 2 for Y, or 3 for PHI), Position_init,Veloc_init,Accel_init
 % 10.For each Point-of-Interest to be reported:
 % Body_i, XI_P_i, ETA_P_i
 % 12.For each applied force :
+% Body_i, XI_P_i, ETA_P_i, y, coeff stiff, coeff frict
 % Body i, XI_P_i, ETA_P_i,Force FX,Force FY, Moment M.
-% 13.For each Spring/Damp/Acuat :
+% 13.For each Spring/Damp/Actuat :
 % Body i,Body j,Spring const, undeformed spring length, Damp. const, Actuator force, XI_P_i, ETA_P_i, XI_P_j, ETA_P_j,
-% 14.Starting_time, Final_time, Report_time_increment
-% 15.Gravity data:
+% 14.For each contact force : 
+% 
+% 15.Starting_time, Final_time, Report_time_increment
+% 16.Gravity data:
 % Gravity force, Gravity direction: Xgr,Ygr
-% 16.Integration data:
+% 17.Integration data:
 % alpha, beta
 
 
@@ -180,7 +183,7 @@ for k=1:Ncontactforces
     line=line+1;
     Contactforce(k).i=H(line,1);
     Contactforce(k).spi=H(line,2:3)';
-    Contactforce(k).y=H(line,4);
+    Contactforce(k).y=H(line,4)';
     Contactforce(k).k=H(line,5);
     Contactforce(k).c=H(line,6);
 end

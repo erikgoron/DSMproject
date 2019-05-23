@@ -1,4 +1,4 @@
-function [g]= ForceContact(g,body,Contactforce,Ncontactforce)
+function [g]= ForceContact(g,body,Contactforce,Ncontactforces)
 
 
 
