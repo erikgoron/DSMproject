@@ -1,8 +1,8 @@
 clear all
-addpath nogit
+
 %load('joints_bodies');
-load('jb_v3.2.mat')
-load('iposvel_v3.2.mat')
+load('jb_v4.mat')
+% load('iposvel_v3.2.mat')
 %load('bodies_L_at_pi_2_rad.mat');
 % load('bodies_R_at_pi_2_rad.mat');
 
@@ -20,8 +20,17 @@ jointPos=-5.11; % -5.11
 
 Nbody=size(bodies,1);
 Nrev=size(joints,1);
+oldbodies=1:Nbody;
+delbodies=[12,24,37,49];
+oldbodies(delbodies)=[];
+newbodies(oldbodies)=1:46;
+newbodies(delbodies)=51;
+bvar=bodies.Variables;
+bodies(delbodies,:)=[];
 
+% joints.b1=
 
+return
 jmat=zeros(Nrev,6);
 for k=1:Nrev
     b1=joints.b1(k);
@@ -61,17 +70,17 @@ end
 %bodies.Phi0=round(bodies.Phi0*2*pi/180,3);
 
 
-% bvar=bodies.Variables;
-% bodiesmat=bvar(:,2:4);
+bvar=bodies.Variables;
+bodiesmat=bvar(:,2:4);
 
 for i=1:Nbody
     L=bodies.Size(i);
     m(i)=L*linDens;
     I(i)=m(i)*L^2/12;
 end
-bodiesmat=[ipos,m',I'];
-
-bodiesmat(1:Nbody,4:6)=0;
+% bodiesmat=[ipos,m',I'];
+% 
+% bodiesmat(1:Nbody,4:6)=0;
 
 % jmat(jmat(:,1)==25,:)=[];
 % jmat(jmat(:,2)==25,:)=[];
@@ -133,9 +142,10 @@ system(['del ',strjoin(tempfiles,' ')]);
 
 % 
 ReadInputDAP
-ground=12;
-Ground.i=12;
-PlotInitialPos2
+% ground=12;
+% Ground.i=12;
+% PlotInitialPos2
+PlotNo
 
 
     
