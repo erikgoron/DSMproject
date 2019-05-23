@@ -1,3 +1,4 @@
 *.asv
 nogit
 anim.gif
+.DS_Store
