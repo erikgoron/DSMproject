@@ -1,13 +1,14 @@
 clear all
 global tspan body Nbody Ncoord u 
 
-% Filename='4bardyn.rtf';
+Filename='4bardyn.rtf';
 
 ReadInputDAP
-
+u=[];
 % Vector with initial conditions y0
 y0=q2y(body,Nbody);
-[t,y]=ode45(@FuncEval,tspan,y0);
+opts=odeset('OutputFcn',@myEventsFcn);
+[t,y]=ode45(@FuncEval,tspan,y0,opts);
 
 for k=1:size(tspan,2)
     Positions(:,k)=y(k,1:Ncoord);

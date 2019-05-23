@@ -3,7 +3,7 @@ global u
 status=0;
 switch (flag)
 case 'init'
-   u=[u,t(1)];
+   u=[u,t(1);
 case '[]'
    u=[u;t];
 case 'done'
