@@ -179,10 +179,10 @@ end
 for k=1:Ncontactforces
     line=line+1;
     Contactforce(k).i=H(line,1);
-    Contactforce(k).spi=H(line,3:4)';
-    Contactforce(k).y=H(line,5)';
-    Contactforce(k).k=H(lines,6);
-    Contactforce(k).c=H(lines,7);
+    Contactforce(k).spi=H(line,2:3)';
+    Contactforce(k).y=H(line,4);
+    Contactforce(k).k=H(line,5);
+    Contactforce(k).c=H(line,6);
 end
     
 line=line+1;
