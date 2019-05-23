@@ -1,17 +1,18 @@
-function [g] = ForceSpringDamperActuator(g, Body, Spr_Damper, Nsprdampers)
+function [g] = ForceSpringDamperActuator(g, body, Spr_Damper, Nsprdampers)
 
+global ld
 % for each spring-damper-actuator
 for k=1:Nsprdampers
     i = Spr_Damper(k).i;
     j = Spr_Damper(k).j;
     
    % Calculate vector d
-   d = Body(i).r+Body(i).A*Spr_Damper(k).spPi-...
-       Body(j).r+Body(j).A*Spr_Damper(k).spPj;
+   d = body(i).r+body(i).A*Spr_Damper(k).spPi-...
+       body(j).r-body(j).A*Spr_Damper(k).spPj;
    l = sqrt(dot(d,d));
    u = d/l;
-   dd = Body(i).rd+Body(i).B*Spr_Damper(k).spPi*Body(i).thetad-...
-        Body(j).rd+Body(j).B*Spr_Damper(k).spPj*Body(j).thetad;
+   dd = body(i).rd+body(i).B*Spr_Damper(k).spPi*body(i).thetad-...
+        body(j).rd-body(j).B*Spr_Damper(k).spPj*body(j).thetad;
    ld = -dot(dd,u);
    
    % Force contributions
@@ -21,8 +22,8 @@ for k=1:Nsprdampers
    f = (fk+fd+fa)*u;
 
    % Apply spring-damper-actuator force to bodies i & j
-   [g] = ApplyForce(g,f,Spr_Damper(k).spPi,Body,i);
-   [g] = ApplyForce(g,-f,Spr_Damper(k).spPj,Body,j)
+   [g] = ApplyForce(g,f,Spr_Damper(k).spPi,body,i);
+   [g] = ApplyForce(g,-f,Spr_Damper(k).spPj,body,j);
 end
  
 end

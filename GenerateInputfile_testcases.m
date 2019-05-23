@@ -1,15 +1,15 @@
 %clear all
 addpath nogit
-%load('joints_bodies');
+% load('joints_bodies');
 %load('jb_v3.2.mat')
 %load('bodies_L_at_pi_2_rad.mat');
 % load('bodies_R_at_pi_2_rad.mat');
 
 %model Parameters
-jointPos=-5.11; % -5.11
-leg2length=47.08; %47.08;
-bodies.Size(2)=leg2length;
-bodies.Size(2+12)=leg2length;
+% jointPos=-5.11; % -5.11
+% leg2length=47.08; %47.08;
+% bodies.Size(2)=leg2length;
+%bodies.Size(2+12)=leg2length;
 
 Nbody=size(bodies,1);
 Nrev=size(joints,1);
@@ -58,22 +58,20 @@ end
 bvar=bodies.Variables;
 bodiesmat=bvar(:,2:4);
 
-Nground=2;
+Nground=1;
 Ndriver=1;
-Npointsint=2;
+Npointsint=0;
+Ntran=0;
 Nrevrev=0;
+%Nrev=Nrev-Nrevrev;
+Nrevtran=1;
 Nsimple=0;
-l1=[Nbody,Nrev,0,Nrevrev,0,Nground,Nsimple,Ndriver,Npointsint];
-ground= [12,bodies.X0(12),0,0;...
-    24,bodies.X0(24),0,pi;];%[12,0,0,pi];
-drivers=[11,3,bodies.Phi0(11),0.17,0.0;];
-%     12,1,bodies.X0(12),-2.9*0,0;
-%     12,2,0,0,0;
-%     12,3,0,0,0;];%10/360*2*pi
+l1=[Nbody,Nrev,Ntran,Nrevrev,Nrevtran,Nground,Nsimple,Ndriver,Npointsint];
+revtran=[2,3,1,0,1.5,0,1.118,0];
+ground= [2,1,0,0];
+drivers=[1,3,bodies.Phi0(1),pi/18,0];
 simple=[];
-POI=[1,-bodies.Size(1)/2,0;...
-    11,-bodies.Size(11)/2,0;];
-
+POI=[];
 timeseries=[0,36,1];
 
 
@@ -81,14 +79,15 @@ timeseries=[0,36,1];
 csvwrite('l1.csv',l1);
 csvwrite('body_input.csv',bodiesmat);
 csvwrite('joints_input.csv',jmat);
+csvwrite('revtran.csv',revtran);
 csvwrite('grounds.csv',ground);
 csvwrite('drivers.csv',drivers);
 csvwrite('simple.csv',simple);
 csvwrite('POI.csv',POI);
 csvwrite('timeseries.csv',timeseries);
-tempfiles={'l1.csv','body_input.csv','joints_input.csv',...
+tempfiles={'l1.csv','body_input.csv','joints_input.csv','revtran.csv',...
     'grounds.csv','drivers.csv','simple.csv','POI.csv','timeseries.csv'};
-Filename='strandbeest_v3.4_acctest111.rtf';
+Filename='test_2.rtf';
 
 system(['copy /b ',strjoin(tempfiles,'+'),' ',Filename]);
 system(['del ',strjoin(tempfiles,' ')]);
@@ -96,9 +95,7 @@ system(['del ',strjoin(tempfiles,' ')]);
 
 
 Readinputdata
-%ground=12;
-%Ground.i=12;
-%PlotInitialPos2
+PlotInitialPos2
 
 
     

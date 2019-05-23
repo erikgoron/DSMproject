@@ -1,30 +1,28 @@
 function [yd] = FuncEval(t,y)
 
 %   Accessing memory
-global Body NBodies Gravity Spr_Damper
-global Nsprdampers Force_applied Napplforces
+global body Nbody  Flag alpha beta 
+global  Ncoord Nconst 
 
 %   Updating local information
-[Body] = y2Body(y,Body,NBodies);
+[body] = y2Body(y,body,Nbody);
 
 %   Mass matrix
-[Mass] = MakeMassMatrix(Body,NBodies);
+[M] = MakeMassMatrix(body,Nbody);
 
 %   Force vector
-[g] = MakeForceVector(Body,Spr_Damper,Nsprdampers,...
-    Force_applied,Napplforces);
+[g] = MakeForceVector(body);
 
 %   Jacobian Matrix and acceleration equations
-Flag.Position=0;
+Flag.Position=1;
 Flag.Jacobian=1;
 Flag.Velocity=0;
-Flag.Acceleration=1;
-[~,Jac,~,Gamma]=MakeJacobianGamma();
+Flag.Gamma=1;
+[Phi,Jac,Niu,Gamma]=KinematicConstraints(body,t);
 
 %   Leading matrix and vector of equations of motion
-Mass=[M, Jac'; Jac, zeros(Nconstraints,Nconstraints)];
-Force=[g;Gamma]
-
+Mass=[M, Jac'; Jac, zeros(Nconst,Nconst)];
+Force=[g;Gamma-2*alpha*(Jac*y(Ncoord+1:2*Ncoord)-Niu)-beta^2*Phi];  
 %   Solving system of equations to get accelerations and Lagrange multipliers
 b=Mass\Force;
 

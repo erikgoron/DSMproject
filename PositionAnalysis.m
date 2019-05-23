@@ -5,8 +5,8 @@ function    [q     ] = PositionAnalysis(q0,time)
 %... Access the global variables
 global NRparameters Flag 
 
-options = optimoptions('fsolve','FunctionTolerance',2e-1,'Display','none',...
-    'SpecifyObjectiveGradient',true,'OptimalityTolerance',1e-4);
+options = optimoptions('fsolve','FunctionTolerance',1e-6,'Display','none',...
+    'SpecifyObjectiveGradient',true,'OptimalityTolerance',1e-6);
 
 [q,fval,exitflag]=fsolve(@PhiJacEval,q0,options);
 
