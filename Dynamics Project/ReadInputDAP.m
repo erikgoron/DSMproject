@@ -1,5 +1,5 @@
 % Format of the input for the Dynamic Analysis Program to be developed:
-% 1.NBody, NRevolute, NTranslation, NRev-Rev, NRev-Tra, Nground, NSimple,Ndriver,NPoints,Nappliedforces,Nspring/damp/actuat,Ncontact 
+% 1.NBody, NRevolute, NTranslation, NRev-Rev, NRev-Tra, Nground, NSimple,Ndriver,NPoints,Nappliedforces,Nspring/damp/actuat,Ncontactforces 
 % 2.For each Rigid Body:
 % Xinit, Yinit, PHIinit, XDinit, YDinit, PHIDinit, Mass,Inertia,
 % 3.For each Revolute Joint:
@@ -29,10 +29,10 @@
 % alpha, beta
 
 
-global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint Napplforces Nsprdampers Ncontact
+global  Nbody Nrevolute Ntrans Nrevrev Nrevtra Nground Nsimple Ndriver Npointsint Napplforces Nsprdampers Ncontactforces
 
 global Jnt_revolute tend tstart tstep q0 qd0 Jnt_trans Ground Points_int Jnt_RevRev Jnt_RevTra
-global Ncoord Nconst tspan Driver body Simple Force_applied Spr_Damper Gravity alpha beta ContactForce
+global Ncoord Nconst tspan Driver body Simple Force_applied Spr_Damper Gravity alpha beta Contactforce
 
 if not(exist('Filename','var'))
     Filename= uigetfile('*.rtf','Select Model');
@@ -175,11 +175,16 @@ for k=1:Nsprdampers
     Spr_Damper(k).spPj=H(line,9:10)';
 end
 
-for k=1:Ncontact
-    Contact
-    
+for k=1:Ncontactforces
+    line=line+1;
+    Contactforce(k).i=H(line,1);
+    Contactforce(k).ct=H(line,2);
+    Contactforce(k).spi=H(line,3:4)';
+    Contactforce(k).spj=H(line,5:6)';
+    Contactforce(k).k=H(lines,7);
+    Contactforce(k).c=H(lines,8);
 end
-
+    
 line=line+1;
 tstart=H(line,1);
 tstep=H(line,3);
