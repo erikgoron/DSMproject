@@ -21,7 +21,7 @@
 % 12.For each applied force :
 % Body_i, XI_P_i, ETA_P_i, y, coeff stiff, coeff frict
 % Body i, XI_P_i, ETA_P_i,Force FX,Force FY, Moment M.
-% 13.For each Spring/Damp/Acuat :
+% 13.For each Spring/Damp/Actuat :
 % Body i,Body j,Spring const, undeformed spring length, Damp. const, Actuator force, XI_P_i, ETA_P_i, XI_P_j, ETA_P_j,
 % 14.For each contact force : 
 % 
