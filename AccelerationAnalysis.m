@@ -10,6 +10,12 @@ Flag.Gamma    = 1;
 body=Preprocessdata(q,qd);
 [~,~,~,Gamma]  = KinematicConstraints(body,time);
 
+%... Evaluate the right-hand-side of acceleration equations
+Flag.Jacobian = 1;
+Flag.Niu      = 0;
+Flag.Gamma    = 0;
+[~,Jac,~,~]  = KinematicConstraints(body,time);
+
 %... Obtain the system accelerations
 qdd = Jac\Gamma;
 

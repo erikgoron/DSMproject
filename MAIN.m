@@ -11,7 +11,7 @@ global q  Jac tstart tstep tend time qd qdd q0
 
 
 
-Readinputdata
+ReadinputKAP
 InitialData
 
 k = 0;
@@ -39,6 +39,6 @@ q0=q+ 0.9*(qd*tstep+ qdd*tstep.^2/2);
 end 
 
 
-% Animate
-% GetPointsOfInterest
+ Animate
+GetPointsOfInterest
 % MeritFunction
