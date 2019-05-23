@@ -1,9 +1,9 @@
 clear all
 global tspan body Nbody Ncoord
 
-% Filename='4bardyn.rtf';
-Filename='test1.DAP.rtf';
-Filename='strandbeestDAP_v3.2.rtf';
+ Filename='4bardyn.rtf';
+% Filename='test1.DAP.rtf';
+% Filename='strandbeestDAP_v3.2.rtf';
 ReadInputDAP
 
 % Vector with initial conditions y0
