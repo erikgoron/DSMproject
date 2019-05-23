@@ -1,7 +1,7 @@
 clear all
-global tspan body Nbody Ncoord u 
+global tspan body Nbody Ncoord
 
-% Filename='4bardyn.rtf';
+Filename='4bardyn.rtf';
 
 ReadInputDAP
 
@@ -12,7 +12,9 @@ y0=q2y(body,Nbody);
 for k=1:size(tspan,2)
     Positions(:,k)=y(k,1:Ncoord);
     Velocities(:,k)=y(k,Ncoord+1:2*Ncoord);
+    lambda(:,k)=getLambdas(tspan(k),y(k,:)');
 end
+
 
 
 % Animate;
