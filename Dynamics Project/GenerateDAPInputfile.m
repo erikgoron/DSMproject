@@ -71,7 +71,7 @@ for i=1:Nbody
 end
 bodiesmat=[ipos,m',I'];
 
-
+bodiesmat(1:Nbody,4:6)=0;
 
 % jmat(jmat(:,1)==25,:)=[];
 % jmat(jmat(:,2)==25,:)=[];
@@ -80,16 +80,18 @@ bodiesmat=[ipos,m',I'];
 % Nbody=size(bodiesmat,1);
 
 
-ground= [12,bodies.X0(12),0,0;
-    24,bodies.X0(24),0,bodies.Phi0(24);];%[12,bodies.X0(12),0,0;];%[12,0,0,pi];
+ground=[]; %[12,bodies.X0(12),0,0;
+%     24,bodies.X0(24),0,bodies.Phi0(24);];%[12,bodies.X0(12),0,0;];%[12,0,0,pi];
 drivers=[];%[11,3,bodies.Phi0(11),0.17,0;];%10/360*2*pi
 simple=[];
 POI=[1,-bodies.Size(1)/2,0;...
     13,-bodies.Size(13)/2,0;];
 forces=[];
 springs=[];
+contactforce=[1,-bodies.Size(1)/2,-60,100,50
+            13,-bodies.Size(13)/2,-60,100,50];
 
-gravity=[0,-9.81];
+gravity=[9.81,0,-1];
 integra=[1,0]; %alpha, beta
 
 Nground=size(ground,1);
@@ -99,11 +101,12 @@ Nrevrev=0;
 Nsimple=0;
 Napplforces=size(forces,1);
 Nsprdampers=size(springs,1);
+Ncontactforces=size(contactforce,1);
 % 1.NBody, NRevolute, NTranslation, NRev-Rev, NRev-Tra, Nground, NSimple,
 %          Ndriver,NPoints,Nappliedforces,Nspring/damp/actuat 
 l1=[Nbody,Nrev,0,Nrevrev,0,Nground,Nsimple,...
-    Ndriver,Npointsint,Napplforces,Nsprdampers];
-timeseries=[0,36,1];
+    Ndriver,Npointsint,Napplforces,Nsprdampers,Ncontactforces];
+timeseries=[0,5,0.05];
 
 
 
@@ -116,21 +119,22 @@ csvwrite('simple.csv',simple);
 csvwrite('POI.csv',POI);
 csvwrite('forces.csv',forces);
 csvwrite('springs.csv',springs);
+csvwrite('contactforce.csv',contactforce);
 csvwrite('timeseries.csv',timeseries);
 csvwrite('gravity.csv',gravity);
 csvwrite('integra.csv',integra);
 tempfiles={'l1.csv','body_input.csv','joints_input.csv',...
     'grounds.csv','drivers.csv','simple.csv','POI.csv',...
-    'forces.csv','springs.csv','timeseries.csv','gravity.csv','integra.csv'};
+    'forces.csv','springs.csv','contactforce.csv','timeseries.csv','gravity.csv','integra.csv'};
 Filename='strandbeestDAP_v3.2.rtf';
 
 system(['copy /b ',strjoin(tempfiles,'+'),' ',Filename]);
 system(['del ',strjoin(tempfiles,' ')]);
 
-
+% 
 ReadInputDAP
-%ground=12;
-%Ground.i=12;
+ground=12;
+Ground.i=12;
 PlotInitialPos2
 
 
