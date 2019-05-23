@@ -1,7 +1,7 @@
 clear all
 global tspan body Nbody Ncoord
 
- Filename='4bardyn.rtf';
+ Filename='strandbeestDAP_v3.2.rtf';
 % Filename='test1.DAP.rtf';
 % Filename='strandbeestDAP_v3.2.rtf';
 ReadInputDAP
