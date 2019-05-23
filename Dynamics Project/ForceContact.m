@@ -1,21 +1,31 @@
-function [g]= ForceContact(g,body,ContactGround,Ncontactground)
-i=1;
-spPi=[1,0]';
-groundY=0;
-k=1000;
-c=50;
+function [g]= ForceContact(g,body,Contactforce,Ncontactforce)
 
-B=[0 -1;1 0];
+
+k=1;
+i=Contactforce(k).i;
+
+
+spPi=Contactforce(k).spPi';
+groundY=Contactforce(k).y;
+k=Contactforce(k).k;
+c=Contactforce(k).c;
+
+v0=50;
+
 
 cPi = body(i).r+body(i).A*spPi;
 cPid= body(i).rd+ body(i).B*spPi*body(i).thetad;
 
 d=groundY-cPi(2);
-dd=cPid(2);
+ddy=cPid(2);
 ddx=cPid(1);
 
 if d>0
-    f=[-c*ddx ;k*d-c*dd];
+    fn=k*d-v0*ddy;
+    fn=max(fn,0);
+    ffri=-Contactforce(k).c*fn*sign(ddx);
+    f=[ffri;fn];
+    
    [g] = ApplyForce(g,f,spPi,body,i);
   
 else
