@@ -6,7 +6,7 @@ global  Gravity
 [g] = ForceSpringDamperActuator(g, body, Spr_Damper, Nsprdampers);
 
 % %Contact forces
-[g] = ForceContact(g, Body, Contact,...):
+% [g] = ForceContact(g, Body, Contact,...)
 % 
 % % Tire contact force
 % [g] = ForceTire(g, Body, Tire,...):

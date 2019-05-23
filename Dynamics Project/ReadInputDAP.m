@@ -20,7 +20,7 @@
 % Body_i, XI_P_i, ETA_P_i
 % 12.For each applied force :
 % Body i, XI_P_i, ETA_P_i,Force FX,Force FY, Moment M.
-% 13.For each Spring/Damp/Acuat :
+% 13.For each Spring/Damp/Actuat :
 % Body i,Body j,Spring const, undeformed spring length, Damp. const, Actuator force, XI_P_i, ETA_P_i, XI_P_j, ETA_P_j,
 % 14.Starting_time, Final_time, Report_time_increment
 % 15.Gravity data:
