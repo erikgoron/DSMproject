@@ -19,9 +19,9 @@ c=Contactforce(k).c;
 cPi = body(i).r+body(i).A*spPi;
 cPid= body(i).rd+ body(i).B*spPi*body(i).thetad;
 
-dy=groundY-cPi(2)
-ddy=-cPid(2)
-ddx=cPid(1)
+dy=groundY-cPi(2);
+ddy=-cPid(2);
+ddx=cPid(1);
 
 if dy>0
     if ddy<=-v0

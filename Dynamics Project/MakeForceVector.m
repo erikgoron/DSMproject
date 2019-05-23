@@ -14,7 +14,7 @@ global  Gravity Contactforce Ncontactforces
 % [g] = ForceTire(g, Body, Tire,...):
 
 % External applied forces
-[g] = ForceExternal(g, Force_applied, Napplforces);
+[g] = ForceExternal(g,body, Force_applied, Napplforces);
 
 end
 

@@ -7,7 +7,7 @@ global q  Jac tstart tstep tend time qd qdd q0
 
 
 % Filename='rameurrevtrans.rtf';
-% Filename='strandbeest_v4.rtf';
+Filename='strandbeest_v4.2KAP.rtf';
 
 
 

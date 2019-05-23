@@ -85,6 +85,7 @@ for i=1:Nbody
     I(i)=m(i)*L^2/12;
 end
  bodiesmat=[ipos,m',I'];
+ bodiesmat(:,4)= bodiesmat(:,4)-10;
 % 
 % bodiesmat(1:Nbody,4:6)=0;
 % bodiesmat(:,7:8)=[m',I'];
@@ -102,13 +103,14 @@ drivers=[];%[11,3,bodies.Phi0(11),0.17,0;];%10/360*2*pi
 simple=[];
 POI=[1,-bodies.Size(1)/2,0;...
     13,-bodies.Size(13)/2,0;];
-forces=[];
+forces=[47,0,0,-2000,0,0];
 springs=[];
-contactforce=[1,-bodies.Size(1)/2,0,-60,100,50;
-            13,-bodies.Size(13)/2,0,-60,100,50;
-            25,-bodies.Size(13)/2,0,-60,100,50;
-            36,-bodies.Size(13)/2,0,-60,100,50];
-contactforce=[];
+ykc=[-60,100000,5000];
+contactforce=[1,-bodies.Size(1)/2,0,ykc;
+            12,-bodies.Size(1)/2,0,ykc;
+            24,-bodies.Size(1)/2,0,ykc;
+            35,-bodies.Size(1)/2,0,ykc];
+
 gravity=[9.81,0,-1];
 integra=[5,5]; %alpha, beta
 
@@ -124,7 +126,7 @@ Ncontactforces=size(contactforce,1);
 %          Ndriver,NPoints,Nappliedforces,Nspring/damp/actuat 
 l1=[Nbody,Nrev,0,Nrevrev,0,Nground,Nsimple,...
     Ndriver,Npointsint,Napplforces,Nsprdampers,Ncontactforces];
-timeseries=[0,5,0.05];
+timeseries=[0,20,0.05];
 
 
 
