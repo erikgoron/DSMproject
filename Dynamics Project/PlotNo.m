@@ -81,7 +81,7 @@ maxplot=[0 0];
 minplot=[0 0];
 
 %rotation matrix for local coords
-A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
+Afunc=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 
 
 %in the first iteration,dont plot, calculate the xlim and ylim
@@ -96,15 +96,40 @@ for i=1:Nbody
     
     b=bodytab{i};
     center=[b.X(kt);b.Y(kt)];
-    points= A(b.PHI(kt))*bodyPoints{i};
+    A=Afunc(b.PHI(kt));
+    points= A*bodyPoints{i};
     
     for j=1:size(points,2)
         px=center(1)+points(1,j);
         py=center(2)+points(2,j);
         
-        l=plot([center(1) px],...
-            [center(2) py],...
-            '-',...
+
+        maxplot=max(maxplot,[px py]);
+        minplot=min(minplot,[px py]);
+       
+        
+        
+    end
+
+end
+for i=1:Nbody
+    if i==Ground(1).i
+        % continue;
+    end
+    
+    b=bodytab{i};
+    center=[b.X(kt);b.Y(kt)];
+    A=Afunc(b.PHI(kt));
+    points= A*bodyPoints{i};
+    
+    for j=1:size(points,2)-1
+        px=center(1)+points(1,j);
+        py=center(2)+points(2,j);
+        px2=center(1)+points(1,j+1);
+        py2=center(2)+points(2,j+1);
+        l=plot([px2 px],...
+            [py2 py],...
+            '-o',...
             'Color',color(i,:));
         
         hold on;
@@ -112,16 +137,27 @@ for i=1:Nbody
         
         lines=[lines l];
         
-        maxplot=max(maxplot,[px py]);
-        minplot=min(minplot,[px py]);
+
         l=[];
         
         
     end
-    label=center+ A(b.PHI(kt))*[0;-3];
-    text(label(1),label(2),num2str(i),'HorizontalAlignment','center')
+    label=center+ A*[2,2]';
+    text(label(1),label(2),num2str(i),...
+        'HorizontalAlignment','center','Color','blue')
     
+    xax(:,i)=[center;A*[3;0]];
+    yax(:,i)=[center;A*[0;3]];
+%     a{i}=([center,xax]-minplot)./(maxplot-minplot);
+    
+%     annotation('arrow',a(1,:),a(2,:));
+%     yax=center+A*[0;3];
+%     ax=[center(1),yax(1)];
+%     ay=[center(2),yax(2)];
+%     annotation('arrow',ax,ay,'Color','gray');
 end
+quiver(xax(1,:),xax(2,:),xax(3,:),xax(4,:),0.12,'Color',[0.8 0.8 1]*0.4,'LineWidth',1.5);
+quiver(yax(1,:),yax(2,:),yax(3,:),yax(4,:),0.12,'Color',[0.8 0.8 1]*0.4,'LineWidth',1.5);
 xlim([minplot(1)-10 maxplot(1)+10]);
 ylim([minplot(2)-10 maxplot(2)+10]);
 

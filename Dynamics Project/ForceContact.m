@@ -24,20 +24,19 @@ ddy=-cPid(2);
 ddx=cPid(1);
 
 if dy>0
-    if ddy<=-v0
-        fn=ce*kc*dy^n;
-    elseif ddy>-v0 &&ddy<v0
-        r=ddy/v0;
-        fn=ce+(1-ce)*(3*r^2-2*r^3);
-    elseif ddy>=v0
-        fn=kc*dy^n;
-    end
+%     if ddy<=-v0
+%         fn=ce*kc*dy^n;
+%     elseif ddy>-v0 &&ddy<v0
+%         r=ddy/v0;
+%         fn=ce+(1-ce)*(3*r^2-2*r^3);
+%     elseif ddy>=v0
+%         fn=kc*dy^n;
+%     end
     
    
-    c_smooth=1-exp(-3*norm(ddx)/v0ff);
+%     c_smooth=1-exp(-3*norm(ddx)/v0ff);
 %     ffri=-c_smooth*Contactforce(k).c*fn*sign(ddx);
     fn=kc*dy+c*ddy;
-%     fn=max(fn,0);
     ffri=-c*ddx;
     f=[ffri;fn];
     
