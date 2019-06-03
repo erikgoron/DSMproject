@@ -22,8 +22,8 @@ for k=1:Nsprdampers
    f = (fk+fd+fa)*u;
 
    % Apply spring-damper-actuator force to bodies i & j
-   [g] = ApplyForce(g,f,Spr_Damper(k).spPi,body,i);
-   [g] = ApplyForce(g,-f,Spr_Damper(k).spPj,body,j);
+   [g] = ApplyForce(g,f,0,Spr_Damper(k).spPi,body,i);
+   [g] = ApplyForce(g,-f,0,Spr_Damper(k).spPj,body,j);
 end
  
 end

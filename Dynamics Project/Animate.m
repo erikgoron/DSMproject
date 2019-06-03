@@ -1,6 +1,6 @@
 % .... ANIMATION
 
-close all
+% close all
 %how many times to repeat
 repeatAnimation=1;
 %option to play animation frame by frame by pressing enter
@@ -8,7 +8,7 @@ frameByFrame=false;
 %animation speed, default = 1= realtime
 frameDelay=0.1; %or manually set tstep after reading input data
 %stop animation anytime with Ctrl+C
-skipmod=10; %show only every n frame
+skipmod=1; %show only every n frame
 
 doGif=false;
 
@@ -72,7 +72,9 @@ end
 %as lines between center and joints/POIs
 lines=[];
 %a color for each body
-color=rand(Nbody,3)*0.85*0;
+colormap('lines');
+color=rand(Nbody,3)*0.85;
+color=[colormap;colormap;colormap];
 %color=color*0;
 
 %initialize the xlim and ylim values
@@ -86,13 +88,13 @@ A=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 %in the first iteration,dont plot, calculate the xlim and ylim
 %so that we have a constant sized window.
 %then repeat the plotting a few time
-fig1=figure;
+fig1=figure(1);
 for doPlot=[0,ones(1,repeatAnimation)]
     for kt=1:length(t)
         if mod(kt,skipmod)~=0&&kt~=length(t)
             continue;
         end
-        for i=1:Nbody
+        for i=1:Nbody%[1,2,3,12,13,14,7,11,18,24,35,41,45,46,47]
             %if i==Ground(1).i
             %continue;
             %end
@@ -156,11 +158,11 @@ for doPlot=[0,ones(1,repeatAnimation)]
         end
 %         qvr=quiver(qx,qy,qu,qv);
 %         plot(qx,qy,'.','Color',hsv2rgb([qn
-        lines=[lines, qvr];
+%         lines=[lines, qvr];
         if doPlot
             if doGif
                 drawnow
-                filename='anim.gif';
+                filename='anim_v4.2.gif';
                 % Capture the plot as an image
                 frame = getframe(fig1);
                 im = frame2im(frame);

@@ -21,6 +21,7 @@ Flag.Gamma=1;
 Flag.Niu=0;
 [Phi,Jac,Niu,Gamma]=KinematicConstraints(body,t);
 
+warning(['cond(Jac)=',num2str(cond(Jac))])
 %   Leading matrix and vector of equations of motion
 Mass=[M, Jac'; Jac, zeros(Nconst,Nconst)];
 Force=[g;Gamma-2*alpha*(Jac*y(Ncoord+1:2*Ncoord)-Niu)-beta^2*Phi];  

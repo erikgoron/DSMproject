@@ -1,6 +1,7 @@
 clear all
+addpath 'Dynamics Project'
 %load('joints_bodiesLR');
-load('jb_v4.2.7.mat')
+load('jb_v4.4.1.mat')
 % load('bodies_L_at_pi_2_rad.mat');
 % load('bodies_R_at_pi_2_rad.mat');
 
@@ -87,7 +88,7 @@ csvwrite('POI.csv',POI);
 csvwrite('timeseries.csv',timeseries);
 tempfiles={'l1.csv','body_input.csv','joints_input.csv',...
     'grounds.csv','drivers.csv','POI.csv','timeseries.csv'};
-Filename='strandbeest_v4.2KAP.rtf';
+Filename='strandbeest_v4.4KAP.rtf';
 
 system(['copy /b ',strjoin(tempfiles,'+'),' ',Filename]);
 system(['del ',strjoin(tempfiles,' ')]);

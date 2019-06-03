@@ -57,7 +57,7 @@ for k = 1:Nrevolute
     
     p2=center+points;
     
-    if norm(p1-p2)>1
+    if norm(p1-p2)>1e-1
         warning(['problem joint ',num2str(k),', body ',...
             num2str(i),', body ',num2str(j),', dist ',num2str(norm(p1-p2))])
         problemjoints=[problemjoints,[k;i;j;p1;p2]];

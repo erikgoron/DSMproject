@@ -2,6 +2,7 @@ clear all
 
 %load('joints_bodies');
 load('jb_v4.2.8.mat')
+Filename='strandbeestDAP_v4.2.9.rtf';
 % load('iposvel_v3.2.mat')
 %load('bodies_L_at_pi_2_rad.mat');
 % load('bodies_R_at_pi_2_rad.mat');
@@ -32,6 +33,9 @@ Nrev=size(joints,1);
 % joints.b1=newbodies(joints.b1)';
 % joints.b2=newbodies(joints.b2)';
 
+% bodies.Size=bodies.Size*1e-2;
+% bodies.X0=bodies.X0*1e-2;
+% bodies.Y0=bodies.Y0*1e-2;
 
 jmat=zeros(Nrev,6);
 for k=1:Nrev
@@ -62,6 +66,8 @@ for k=1:Nrev
         a=[-20.91-95,-95,-85,-85+20.91];
         loc48(3:10)=[a,-a];
         b2_loc=loc48(loc);
+    elseif loc==-1
+        b2_loc=0;
     else
         error('joint2');
     end
@@ -76,19 +82,22 @@ end
 %bodies.Phi0=round(bodies.Phi0*2*pi/180,3);
 
 
-% bvar=bodies.Variables;
-% bodiesmat=bvar(:,2:4);
+bvar=bodies.Variables;
+bodiesmat=bvar(:,2:4);
 
 for i=1:Nbody
     L=bodies.Size(i);
     m(i)=L*linDens;
     I(i)=m(i)*L^2/12;
 end
- bodiesmat=[ipos,m',I'];
- bodiesmat(:,4)= bodiesmat(:,4)-10;
+% ipos(:,[1:2,4:5])=ipos(:,[1:2,4:5])*1e-2;
+%  bodiesmat=[ipos,m',I'];
 % 
-% bodiesmat(1:Nbody,4:6)=0;
-% bodiesmat(:,7:8)=[m',I'];
+% bodiesmat(:,4)= bodiesmat(:,4)-0.1;
+% 
+bodiesmat(1:Nbody,4:6)=0;
+bodiesmat(:,5)=-10;
+bodiesmat(:,7:8)=[m',I'];
 
 % jmat(jmat(:,1)==25,:)=[];
 % jmat(jmat(:,2)==25,:)=[];
@@ -103,9 +112,11 @@ drivers=[];%[11,3,bodies.Phi0(11),0.17,0;];%10/360*2*pi
 simple=[];
 POI=[1,-bodies.Size(1)/2,0;...
     13,-bodies.Size(13)/2,0;];
-forces=[47,0,0,-2000,0,0];
+forces=[47,0,0,-2000,-200,0;];
+%         34,0,0,0,0,1;
+%         11,0,0,0,0,1;];
 springs=[];
-ykc=[-60,100000,5000];
+ykc=[-59,1e5,5e3];
 contactforce=[1,-bodies.Size(1)/2,0,ykc;
             12,-bodies.Size(1)/2,0,ykc;
             24,-bodies.Size(1)/2,0,ykc;
@@ -113,6 +124,13 @@ contactforce=[1,-bodies.Size(1)/2,0,ykc;
 
 gravity=[9.81,0,-1];
 integra=[5,5]; %alpha, beta
+
+
+% contactforce=[1,-bodies.Size(1)/2,0,ykc;];
+% forces=[];
+%  bodiesmat(2:Nbody)=[]; Nbody=1;
+%  jmat=[];Nrev=0;
+% POI=[1,-bodies.Size(1)/2,0];
 
 Nground=size(ground,1);
 Ndriver=size(drivers,1);
@@ -126,7 +144,7 @@ Ncontactforces=size(contactforce,1);
 %          Ndriver,NPoints,Nappliedforces,Nspring/damp/actuat 
 l1=[Nbody,Nrev,0,Nrevrev,0,Nground,Nsimple,...
     Ndriver,Npointsint,Napplforces,Nsprdampers,Ncontactforces];
-timeseries=[0,20,0.05];
+timeseries=[0,20,0.5];
 
 
 
@@ -146,13 +164,13 @@ csvwrite('integra.csv',integra);
 tempfiles={'l1.csv','body_input.csv','joints_input.csv',...
     'grounds.csv','drivers.csv','simple.csv','POI.csv',...
     'forces.csv','springs.csv','contactforce.csv','timeseries.csv','gravity.csv','integra.csv'};
-Filename='strandbeestDAP_v4.2.rtf';
+% Filename='strandbeestDAP_v4.4.rtf';
 
 system(['copy /b ',strjoin(tempfiles,'+'),' ',Filename]);
 system(['del ',strjoin(tempfiles,' ')]);
 
 % 
-ReadInputDAP
+% ReadInputDAP
 % ground=12;
 % Ground.i=12;
 % PlotInitialPos2

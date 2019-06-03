@@ -1,12 +1,12 @@
-clear all
-Filename='strandbeestDAP_v4.2.rtf';
+% clear all
+% Filename='strandbeestDAP_v4.3.rtf';
+% 
+%  
+% ReadInputDAP
+% ground=12;
+% Ground.i=12;
 
- 
-ReadInputDAP
-ground=12;
-Ground.i=12;
-
-close all
+% close all
 %how many times to repeat
 repeatAnimation=5;
 %option to play animation frame by frame by pressing enter
@@ -90,9 +90,7 @@ Afunc=@(phi) [cos(phi) -sin(phi);sin(phi) cos(phi)];
 fig1=figure;
 kt=1;
 for i=1:Nbody
-    if i==Ground(1).i
-        % continue;
-    end
+
     
     b=bodytab{i};
     center=[b.X(kt);b.Y(kt)];
@@ -142,12 +140,12 @@ for i=1:Nbody
         
         
     end
-    label=center+ A*[2,2]';
+    label=center+ A*[2e-2,2e-2]';
     text(label(1),label(2),num2str(i),...
         'HorizontalAlignment','center','Color','blue')
     
-    xax(:,i)=[center;A*[3;0]];
-    yax(:,i)=[center;A*[0;3]];
+    xax(:,i)=[center;A*[3e-2;0]];
+    yax(:,i)=[center;A*[0;3e-2]];
 %     a{i}=([center,xax]-minplot)./(maxplot-minplot);
     
 %     annotation('arrow',a(1,:),a(2,:));
