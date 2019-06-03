@@ -8,9 +8,8 @@ global Flag Jnt_RevRev body0
     if (Flag.Position==1 || Flag.Jacobian==1 || Flag.Gamma==1)
         d = body(j).r+body(j).A*Jnt_RevRev(k).spPj-body(i).r-...
             body(i).A*Jnt_RevRev(k).spPi;
-         d0=0.4830;
- %       d0= norm(body0(j).r+body0(j).A*Jnt_RevRev(k).spPj-body0(i).r-...
-  %           body0(i).A*Jnt_RevRev(k).spPi);
+        d0= norm(body0(j).r+body0(j).A*Jnt_RevRev(k).spPj-body0(i).r-...
+            body0(i).A*Jnt_RevRev(k).spPi);
     end
     
     if (Flag.Position==1)
