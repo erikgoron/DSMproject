@@ -1,2 +1,2 @@
-#Kinetic Analysis Program
-Description here
+## Dynamic and kinematic analysis of the strandbeest 
+
